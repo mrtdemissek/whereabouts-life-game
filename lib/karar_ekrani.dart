@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'tohumlu.dart';
 import 'package:flutter/material.dart';
 import 'aile.dart';
 import 'karar.dart';
@@ -103,17 +104,17 @@ class _KararEkraniState extends State<KararEkrani> {
   // sabit; normal hayatta her seferinde rastgele.
   // tuz: 1 kart seçimi, 2 aile hikâyesi, 3 ölüm nedeni
   Random _rnd(int tuz, int y) =>
-      widget.gunluk ? Random(_tohum + tuz * 100003 + y) : _r;
+      widget.gunluk ? Tohumlu(_tohum + tuz * 100003 + y) : _r;
 
   // Bir yaş için ölüm zarı: günlükte yaşa göre sabit, normalde rastgele
   double _zar(int y) => widget.gunluk
-      ? Random(_tohum + 4 * 100003 + y).nextDouble()
+      ? Tohumlu(_tohum + 4 * 100003 + y).nextDouble()
       : _r.nextDouble();
 
   @override
   void initState() {
     super.initState();
-    final g = widget.gunluk ? Random(_tohum) : _r;
+    final g = widget.gunluk ? Tohumlu(_tohum) : _r;
     ten = _tenler[g.nextInt(_tenler.length)];
     gomlek = _gomlekler[g.nextInt(_gomlekler.length)];
     riskleriYukle().then((harita) {

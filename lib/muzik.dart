@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'tohumlu.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -187,7 +188,7 @@ Uint8List _muzikUret(int tur) {
   final olcuSayisi = plan.akorlar.length * plan.olcuPerAkor;
   final n = (olcuSn * olcuSayisi * _hiz).round();
   final buf = Float64List(n);
-  final r = Random(plan.tohum);
+  final r = Tohumlu(plan.tohum);
 
   // Yastık ve bas
   for (var a = 0; a < plan.akorlar.length; a++) {

@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'tohumlu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ulke.dart';
 
@@ -17,7 +17,7 @@ Ulke gununUlkesi(List<Ulke> ulkeler) {
   final d = DateTime.now();
   final tohum = d.year * 10000 + d.month * 100 + d.day;
   final sirali = [...ulkeler]..sort((a, b) => a.kod.compareTo(b.kod));
-  return sirali[Random(tohum).nextInt(sirali.length)];
+  return sirali[Tohumlu(tohum).nextInt(sirali.length)];
 }
 
 // Günün meydan okuması için ortak tohum: aynı gün ve aynı ülke için herkeste
