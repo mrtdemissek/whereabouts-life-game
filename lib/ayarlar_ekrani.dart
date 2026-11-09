@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dil.dart';
+import 'muzik.dart';
 import 'oyuncak.dart';
 import 'ses.dart';
 import 'tema.dart';
@@ -13,6 +14,7 @@ class AyarlarEkrani extends StatefulWidget {
 
 class _AyarlarEkraniState extends State<AyarlarEkrani> {
   final Ses ses = Ses.ornek;
+  final Muzik muzik = Muzik.ornek;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,15 @@ class _AyarlarEkraniState extends State<AyarlarEkrani> {
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
+            title: Text(context.t('muzik')),
+            value: muzik.acik,
+            onChanged: (v) async {
+              await muzik.ayarla(v);
+              setState(() {});
+            },
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
             title: Text(context.t('titresim')),
             value: ses.titresimAcik,
             onChanged: (v) async {
@@ -92,6 +103,27 @@ class _AyarlarEkraniState extends State<AyarlarEkrani> {
           ElevatedButton(
             onPressed: () => ses.titret(TitresimTuru.orta),
             child: Text(context.t('titresim_dene')),
+          ),
+          const SizedBox(height: 24),
+          Text(context.t('muzik_dene'), style: baslik),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              ElevatedButton(
+                onPressed: () => muzik.cal(MuzikTuru.ana),
+                child: Text(context.t('muzik_ana')),
+              ),
+              ElevatedButton(
+                onPressed: () => muzik.cal(MuzikTuru.oyun),
+                child: Text(context.t('muzik_oyun')),
+              ),
+              ElevatedButton(
+                onPressed: () => muzik.durdur(),
+                child: Text(context.t('muzik_durdur')),
+              ),
+            ],
           ),
         ],
       ),

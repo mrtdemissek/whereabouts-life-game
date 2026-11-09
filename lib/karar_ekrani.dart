@@ -18,6 +18,7 @@ import 'oyuncak.dart';
 import 'tema.dart';
 import 'risk.dart';
 import 'ses.dart';
+import 'muzik.dart';
 import 'piksel_karakter.dart';
 import 'konfeti.dart';
 
@@ -119,6 +120,7 @@ class _KararEkraniState extends State<KararEkrani> {
       risk = harita[widget.ulke.kod];
     });
     _olayiSec();
+    Muzik.ornek.cal(MuzikTuru.oyun);
   }
 
   int _sinirla(int v) => v.clamp(0, 100).toInt();
@@ -190,9 +192,11 @@ class _KararEkraniState extends State<KararEkrani> {
     });
   }
 
+  // Hayat bitince: kapanış sesi, güçlü titreşim, müzik yavaşça kısılır
   void _sonSesi() {
     Ses.ornek.cal(SesTuru.son);
     Ses.ornek.titret(TitresimTuru.guclu);
+    Muzik.ornek.durdur();
   }
 
   // Bebeklik ve erken çocukluk: kararları aile verir, oyuncu yalnızca devam eder

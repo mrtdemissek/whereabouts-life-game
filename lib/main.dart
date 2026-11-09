@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'acilis_ekrani.dart';
 import 'dil.dart';
+import 'muzik.dart';
 import 'ses.dart';
 import 'tema.dart';
 
@@ -10,6 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await genelYerel.yukle();
   await Ses.ornek.yukle();
+  await Muzik.ornek.yukle();
   runApp(YerelKapsam(yerel: genelYerel, child: const HayatOyunu()));
 }
 

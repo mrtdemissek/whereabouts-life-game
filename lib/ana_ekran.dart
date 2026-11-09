@@ -10,6 +10,7 @@ import 'gecis.dart';
 import 'gunluk.dart';
 import 'karar_ekrani.dart';
 import 'kaynaklar_ekrani.dart';
+import 'muzik.dart';
 import 'oyuncak.dart';
 import 'rozet_ekrani.dart';
 import 'sahne.dart';
@@ -34,6 +35,7 @@ class _AnaEkranState extends State<AnaEkran> {
     super.initState();
     _ulkeler = ulkeleriYukle();
     _durumuYenile();
+    Muzik.ornek.cal(MuzikTuru.ana);
   }
 
   Future<void> _durumuYenile() async {
@@ -46,9 +48,10 @@ class _AnaEkranState extends State<AnaEkran> {
     });
   }
 
-  // Bir ekrana gider, dönünce atlası ve seriyi yeniler
+  // Bir ekrana gider, dönünce atlası ve seriyi yeniler, ana müziği geri getirir
   Future<void> _git(Widget sayfa) async {
     await Navigator.push(context, yumusakGecis(sayfa));
+    Muzik.ornek.cal(MuzikTuru.ana);
     _durumuYenile();
   }
 

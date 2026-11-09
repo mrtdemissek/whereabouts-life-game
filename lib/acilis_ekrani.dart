@@ -4,6 +4,7 @@ import 'ana_ekran.dart';
 import 'ayarlar_ekrani.dart';
 import 'dil.dart';
 import 'gecis.dart';
+import 'muzik.dart';
 import 'oyuncak.dart';
 import 'sahne.dart';
 import 'tema.dart';
@@ -28,6 +29,9 @@ class _AcilisEkraniState extends State<AcilisEkrani> {
     _zamanlayici = Timer.periodic(const Duration(milliseconds: 1600), (_) {
       if (mounted) setState(() => _i = (_i + 1) % _yaslar.length);
     });
+    // Ana müziği başlat, iki parçayı da arka planda hazırla
+    Muzik.ornek.cal(MuzikTuru.ana);
+    Muzik.ornek.hazirla();
   }
 
   @override
