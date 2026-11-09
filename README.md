@@ -1,6 +1,8 @@
-# Whereabouts (working title)
+# Whereabouts
 
-*Türkçe özet: Rastgele bir ülkede doğduğun, her yıl bir karar verdiğin ve hayatın gerçek verilerden türetilen koşullara göre şekillendiği, Flutter ile yazılmış piksel sanatlı bir hayat simülasyonu. Öğrenme ve portföy projesi.*
+*Türkçe özet: Rastgele bir ülkede doğduğun, her yıl bir karar verdiğin ve hayatın gerçek verilerden türetilen koşullara göre şekillendiği, Flutter ile yazılmış piksel sanatlı bir hayat simülasyonu (Whereabouts - Hayat Oyunu). Öğrenme ve portföy projesi.*
+
+**Play in your browser: https://mrtdemissek.github.io/whereabouts-life-game/**
 
 A pastel pixel-art life simulation built with Flutter. You are born in a random country, make one decision a year by swiping cards, and live a life shaped by conditions derived from real-world indicators. Each country has its own life expectancy, and you complete a country in the atlas only by reaching its expected age.
 
@@ -11,15 +13,22 @@ A pastel pixel-art life simulation built with Flutter. You are born in a random 
 - **Swipe cards:** four meters (time, money, health, relationships). Choices leave hidden tags that unlock chain cards later in life.
 - **Mortality model:** death is random and depends on the country's life expectancy and your health. After the expected age, life continues until death.
 - **Country conditions:** life events and the cause of death are drawn from a risk profile built from published indicators (water, disease, hunger, violence, conflict, inflation, unemployment, governance perception and more). An event only appears when real data exists for the country.
-- **Atlas, badges, daily challenge:** complete countries, earn badges, keep a daily streak.
+- **Atlas, badges, daily challenge:** complete countries, earn badges, keep a daily streak. The daily challenge uses a seeded generator, so everyone gets the same country and the same dice that day, on every platform.
 - **Languages:** Turkish and English.
 
 ## Tech
 
-- Flutter / Dart, tested on an Android emulator (iOS not tested).
+- Flutter / Dart. Tested on an Android emulator and in a desktop browser (iOS not tested natively).
 - All pixel art (characters, scenery, icons, confetti) is drawn in code.
-- All sound effects are synthesized in code at runtime; no audio files.
+- All sound effects and background music are synthesized in code at runtime; no audio files.
 - Local storage with `shared_preferences`; audio with `audioplayers`.
+- The web version is built and published automatically with GitHub Actions (`.github/workflows/web.yml`).
+
+## Web version notes
+
+- Music starts after your first tap (browser autoplay rules).
+- There is no vibration feedback in the browser.
+- Progress is stored in your browser, so clearing site data resets the atlas and badges.
 
 ## Data and attribution
 
@@ -42,17 +51,12 @@ flutter pub get
 flutter run
 ```
 
-To rebuild the risk data (needs internet, Windows PowerShell):
+To build the web version yourself:
 
 ```
-powershell -ExecutionPolicy Bypass -File tools\veri_hazirla.ps1
+flutter build web --release
 ```
-
-## Credits
-
-- Inspired by the idea of being born at random into a real-world statistic. No code, text or art from any other project is used.
-- UI font: Fredoka (SIL Open Font License 1.1), loaded at runtime with the `google_fonts` package.
 
 ## License
 
-Code is released under the MIT License (see `LICENSE`). The files in `assets/` are derived from CC BY 4.0 data as described above.
+MIT, see `LICENSE`.
