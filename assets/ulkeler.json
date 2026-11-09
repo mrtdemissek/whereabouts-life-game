@@ -1,0 +1,1304 @@
+[
+    {
+        "kod":  "AFG",
+        "ad":  "Afghanistan",
+        "yil":  2024,
+        "omur":  66.3
+    },
+    {
+        "kod":  "ALB",
+        "ad":  "Albania",
+        "yil":  2024,
+        "omur":  79.8
+    },
+    {
+        "kod":  "DZA",
+        "ad":  "Algeria",
+        "yil":  2024,
+        "omur":  76.5
+    },
+    {
+        "kod":  "ASM",
+        "ad":  "American Samoa",
+        "yil":  2024,
+        "omur":  73.0
+    },
+    {
+        "kod":  "AND",
+        "ad":  "Andorra",
+        "yil":  2024,
+        "omur":  84.2
+    },
+    {
+        "kod":  "AGO",
+        "ad":  "Angola",
+        "yil":  2024,
+        "omur":  64.8
+    },
+    {
+        "kod":  "ATG",
+        "ad":  "Antigua and Barbuda",
+        "yil":  2024,
+        "omur":  77.8
+    },
+    {
+        "kod":  "ARG",
+        "ad":  "Argentina",
+        "yil":  2024,
+        "omur":  77.5
+    },
+    {
+        "kod":  "ARM",
+        "ad":  "Armenia",
+        "yil":  2024,
+        "omur":  78.3
+    },
+    {
+        "kod":  "ABW",
+        "ad":  "Aruba",
+        "yil":  2024,
+        "omur":  76.5
+    },
+    {
+        "kod":  "AUS",
+        "ad":  "Australia",
+        "yil":  2024,
+        "omur":  83.1
+    },
+    {
+        "kod":  "AUT",
+        "ad":  "Austria",
+        "yil":  2024,
+        "omur":  82.0
+    },
+    {
+        "kod":  "AZE",
+        "ad":  "Azerbaijan",
+        "yil":  2024,
+        "omur":  74.6
+    },
+    {
+        "kod":  "BHS",
+        "ad":  "Bahamas, The",
+        "yil":  2024,
+        "omur":  74.7
+    },
+    {
+        "kod":  "BHR",
+        "ad":  "Bahrain",
+        "yil":  2024,
+        "omur":  81.4
+    },
+    {
+        "kod":  "BGD",
+        "ad":  "Bangladesh",
+        "yil":  2024,
+        "omur":  74.9
+    },
+    {
+        "kod":  "BRB",
+        "ad":  "Barbados",
+        "yil":  2024,
+        "omur":  76.3
+    },
+    {
+        "kod":  "BLR",
+        "ad":  "Belarus",
+        "yil":  2024,
+        "omur":  74.4
+    },
+    {
+        "kod":  "BEL",
+        "ad":  "Belgium",
+        "yil":  2024,
+        "omur":  82.3
+    },
+    {
+        "kod":  "BLZ",
+        "ad":  "Belize",
+        "yil":  2024,
+        "omur":  73.7
+    },
+    {
+        "kod":  "BEN",
+        "ad":  "Benin",
+        "yil":  2024,
+        "omur":  61.0
+    },
+    {
+        "kod":  "BMU",
+        "ad":  "Bermuda",
+        "yil":  2024,
+        "omur":  82.5
+    },
+    {
+        "kod":  "BTN",
+        "ad":  "Bhutan",
+        "yil":  2024,
+        "omur":  73.3
+    },
+    {
+        "kod":  "BOL",
+        "ad":  "Bolivia",
+        "yil":  2024,
+        "omur":  68.7
+    },
+    {
+        "kod":  "BIH",
+        "ad":  "Bosnia and Herzegovina",
+        "yil":  2024,
+        "omur":  78.0
+    },
+    {
+        "kod":  "BWA",
+        "ad":  "Botswana",
+        "yil":  2024,
+        "omur":  69.3
+    },
+    {
+        "kod":  "BRA",
+        "ad":  "Brazil",
+        "yil":  2024,
+        "omur":  76.0
+    },
+    {
+        "kod":  "VGB",
+        "ad":  "British Virgin Islands",
+        "yil":  2024,
+        "omur":  77.4
+    },
+    {
+        "kod":  "BRN",
+        "ad":  "Brunei Darussalam",
+        "yil":  2024,
+        "omur":  75.5
+    },
+    {
+        "kod":  "BGR",
+        "ad":  "Bulgaria",
+        "yil":  2024,
+        "omur":  75.8
+    },
+    {
+        "kod":  "BFA",
+        "ad":  "Burkina Faso",
+        "yil":  2024,
+        "omur":  61.3
+    },
+    {
+        "kod":  "BDI",
+        "ad":  "Burundi",
+        "yil":  2024,
+        "omur":  63.8
+    },
+    {
+        "kod":  "CPV",
+        "ad":  "Cabo Verde",
+        "yil":  2024,
+        "omur":  76.2
+    },
+    {
+        "kod":  "KHM",
+        "ad":  "Cambodia",
+        "yil":  2024,
+        "omur":  70.8
+    },
+    {
+        "kod":  "CMR",
+        "ad":  "Cameroon",
+        "yil":  2024,
+        "omur":  64.0
+    },
+    {
+        "kod":  "CAN",
+        "ad":  "Canada",
+        "yil":  2024,
+        "omur":  82.1
+    },
+    {
+        "kod":  "CYM",
+        "ad":  "Cayman Islands",
+        "yil":  2024,
+        "omur":  80.5
+    },
+    {
+        "kod":  "CAF",
+        "ad":  "Central African Republic",
+        "yil":  2024,
+        "omur":  57.7
+    },
+    {
+        "kod":  "TCD",
+        "ad":  "Chad",
+        "yil":  2024,
+        "omur":  55.2
+    },
+    {
+        "kod":  "CHI",
+        "ad":  "Channel Islands",
+        "yil":  2024,
+        "omur":  81.2
+    },
+    {
+        "kod":  "CHL",
+        "ad":  "Chile",
+        "yil":  2024,
+        "omur":  81.4
+    },
+    {
+        "kod":  "CHN",
+        "ad":  "China",
+        "yil":  2024,
+        "omur":  78.0
+    },
+    {
+        "kod":  "COL",
+        "ad":  "Colombia",
+        "yil":  2024,
+        "omur":  77.9
+    },
+    {
+        "kod":  "COM",
+        "ad":  "Comoros",
+        "yil":  2024,
+        "omur":  67.0
+    },
+    {
+        "kod":  "COD",
+        "ad":  "Congo, Dem. Rep.",
+        "yil":  2024,
+        "omur":  62.1
+    },
+    {
+        "kod":  "COG",
+        "ad":  "Congo, Rep.",
+        "yil":  2024,
+        "omur":  66.0
+    },
+    {
+        "kod":  "CRI",
+        "ad":  "Costa Rica",
+        "yil":  2024,
+        "omur":  81.0
+    },
+    {
+        "kod":  "CIV",
+        "ad":  "Cote d\u0027Ivoire",
+        "yil":  2024,
+        "omur":  62.1
+    },
+    {
+        "kod":  "HRV",
+        "ad":  "Croatia",
+        "yil":  2024,
+        "omur":  78.9
+    },
+    {
+        "kod":  "CUB",
+        "ad":  "Cuba",
+        "yil":  2024,
+        "omur":  78.3
+    },
+    {
+        "kod":  "CUW",
+        "ad":  "Curacao",
+        "yil":  2024,
+        "omur":  77.0
+    },
+    {
+        "kod":  "CYP",
+        "ad":  "Cyprus",
+        "yil":  2024,
+        "omur":  81.8
+    },
+    {
+        "kod":  "CZE",
+        "ad":  "Czechia",
+        "yil":  2024,
+        "omur":  80.0
+    },
+    {
+        "kod":  "DNK",
+        "ad":  "Denmark",
+        "yil":  2024,
+        "omur":  82.3
+    },
+    {
+        "kod":  "DJI",
+        "ad":  "Djibouti",
+        "yil":  2024,
+        "omur":  66.2
+    },
+    {
+        "kod":  "DMA",
+        "ad":  "Dominica",
+        "yil":  2024,
+        "omur":  71.3
+    },
+    {
+        "kod":  "DOM",
+        "ad":  "Dominican Republic",
+        "yil":  2024,
+        "omur":  73.9
+    },
+    {
+        "kod":  "ECU",
+        "ad":  "Ecuador",
+        "yil":  2024,
+        "omur":  77.6
+    },
+    {
+        "kod":  "EGY",
+        "ad":  "Egypt, Arab Rep.",
+        "yil":  2024,
+        "omur":  71.8
+    },
+    {
+        "kod":  "SLV",
+        "ad":  "El Salvador",
+        "yil":  2024,
+        "omur":  72.3
+    },
+    {
+        "kod":  "GNQ",
+        "ad":  "Equatorial Guinea",
+        "yil":  2024,
+        "omur":  63.9
+    },
+    {
+        "kod":  "ERI",
+        "ad":  "Eritrea",
+        "yil":  2024,
+        "omur":  68.9
+    },
+    {
+        "kod":  "EST",
+        "ad":  "Estonia",
+        "yil":  2024,
+        "omur":  79.3
+    },
+    {
+        "kod":  "SWZ",
+        "ad":  "Eswatini",
+        "yil":  2024,
+        "omur":  64.3
+    },
+    {
+        "kod":  "ETH",
+        "ad":  "Ethiopia",
+        "yil":  2024,
+        "omur":  67.6
+    },
+    {
+        "kod":  "FRO",
+        "ad":  "Faroe Islands",
+        "yil":  2024,
+        "omur":  83.1
+    },
+    {
+        "kod":  "FJI",
+        "ad":  "Fiji",
+        "yil":  2024,
+        "omur":  67.5
+    },
+    {
+        "kod":  "FIN",
+        "ad":  "Finland",
+        "yil":  2024,
+        "omur":  82.3
+    },
+    {
+        "kod":  "FRA",
+        "ad":  "France",
+        "yil":  2024,
+        "omur":  83.0
+    },
+    {
+        "kod":  "PYF",
+        "ad":  "French Polynesia",
+        "yil":  2024,
+        "omur":  84.2
+    },
+    {
+        "kod":  "GAB",
+        "ad":  "Gabon",
+        "yil":  2024,
+        "omur":  68.5
+    },
+    {
+        "kod":  "GMB",
+        "ad":  "Gambia, The",
+        "yil":  2024,
+        "omur":  66.1
+    },
+    {
+        "kod":  "GEO",
+        "ad":  "Georgia",
+        "yil":  2024,
+        "omur":  74.7
+    },
+    {
+        "kod":  "DEU",
+        "ad":  "Germany",
+        "yil":  2024,
+        "omur":  80.8
+    },
+    {
+        "kod":  "GHA",
+        "ad":  "Ghana",
+        "yil":  2024,
+        "omur":  65.7
+    },
+    {
+        "kod":  "GIB",
+        "ad":  "Gibraltar",
+        "yil":  2024,
+        "omur":  83.6
+    },
+    {
+        "kod":  "GRC",
+        "ad":  "Greece",
+        "yil":  2024,
+        "omur":  81.8
+    },
+    {
+        "kod":  "GRL",
+        "ad":  "Greenland",
+        "yil":  2024,
+        "omur":  70.3
+    },
+    {
+        "kod":  "GRD",
+        "ad":  "Grenada",
+        "yil":  2024,
+        "omur":  75.4
+    },
+    {
+        "kod":  "GUM",
+        "ad":  "Guam",
+        "yil":  2024,
+        "omur":  77.4
+    },
+    {
+        "kod":  "GTM",
+        "ad":  "Guatemala",
+        "yil":  2024,
+        "omur":  72.7
+    },
+    {
+        "kod":  "GIN",
+        "ad":  "Guinea",
+        "yil":  2024,
+        "omur":  60.9
+    },
+    {
+        "kod":  "GNB",
+        "ad":  "Guinea-Bissau",
+        "yil":  2024,
+        "omur":  64.3
+    },
+    {
+        "kod":  "GUY",
+        "ad":  "Guyana",
+        "yil":  2024,
+        "omur":  70.3
+    },
+    {
+        "kod":  "HTI",
+        "ad":  "Haiti",
+        "yil":  2024,
+        "omur":  65.1
+    },
+    {
+        "kod":  "HND",
+        "ad":  "Honduras",
+        "yil":  2024,
+        "omur":  73.0
+    },
+    {
+        "kod":  "HKG",
+        "ad":  "Hong Kong SAR, China",
+        "yil":  2024,
+        "omur":  85.4
+    },
+    {
+        "kod":  "HUN",
+        "ad":  "Hungary",
+        "yil":  2024,
+        "omur":  76.7
+    },
+    {
+        "kod":  "ISL",
+        "ad":  "Iceland",
+        "yil":  2024,
+        "omur":  82.8
+    },
+    {
+        "kod":  "IND",
+        "ad":  "India",
+        "yil":  2024,
+        "omur":  72.2
+    },
+    {
+        "kod":  "IDN",
+        "ad":  "Indonesia",
+        "yil":  2024,
+        "omur":  71.3
+    },
+    {
+        "kod":  "IRN",
+        "ad":  "Iran, Islamic Rep.",
+        "yil":  2024,
+        "omur":  77.9
+    },
+    {
+        "kod":  "IRQ",
+        "ad":  "Iraq",
+        "yil":  2024,
+        "omur":  72.4
+    },
+    {
+        "kod":  "IRL",
+        "ad":  "Ireland",
+        "yil":  2024,
+        "omur":  83.0
+    },
+    {
+        "kod":  "IMN",
+        "ad":  "Isle of Man",
+        "yil":  2024,
+        "omur":  81.1
+    },
+    {
+        "kod":  "ISR",
+        "ad":  "Israel",
+        "yil":  2024,
+        "omur":  83.2
+    },
+    {
+        "kod":  "ITA",
+        "ad":  "Italy",
+        "yil":  2024,
+        "omur":  84.0
+    },
+    {
+        "kod":  "JAM",
+        "ad":  "Jamaica",
+        "yil":  2024,
+        "omur":  71.6
+    },
+    {
+        "kod":  "JPN",
+        "ad":  "Japan",
+        "yil":  2024,
+        "omur":  84.0
+    },
+    {
+        "kod":  "JOR",
+        "ad":  "Jordan",
+        "yil":  2024,
+        "omur":  78.0
+    },
+    {
+        "kod":  "KAZ",
+        "ad":  "Kazakhstan",
+        "yil":  2024,
+        "omur":  74.5
+    },
+    {
+        "kod":  "KEN",
+        "ad":  "Kenya",
+        "yil":  2024,
+        "omur":  63.8
+    },
+    {
+        "kod":  "KIR",
+        "ad":  "Kiribati",
+        "yil":  2024,
+        "omur":  66.6
+    },
+    {
+        "kod":  "PRK",
+        "ad":  "Korea, Dem. People\u0027s Rep.",
+        "yil":  2024,
+        "omur":  73.7
+    },
+    {
+        "kod":  "KOR",
+        "ad":  "Korea, Rep.",
+        "yil":  2024,
+        "omur":  83.6
+    },
+    {
+        "kod":  "XKX",
+        "ad":  "Kosovo",
+        "yil":  2024,
+        "omur":  78.2
+    },
+    {
+        "kod":  "KWT",
+        "ad":  "Kuwait",
+        "yil":  2024,
+        "omur":  84.6
+    },
+    {
+        "kod":  "KGZ",
+        "ad":  "Kyrgyz Republic",
+        "yil":  2024,
+        "omur":  72.4
+    },
+    {
+        "kod":  "LAO",
+        "ad":  "Lao PDR",
+        "yil":  2024,
+        "omur":  69.2
+    },
+    {
+        "kod":  "LVA",
+        "ad":  "Latvia",
+        "yil":  2024,
+        "omur":  76.4
+    },
+    {
+        "kod":  "LBN",
+        "ad":  "Lebanon",
+        "yil":  2024,
+        "omur":  77.9
+    },
+    {
+        "kod":  "LSO",
+        "ad":  "Lesotho",
+        "yil":  2024,
+        "omur":  57.8
+    },
+    {
+        "kod":  "LBR",
+        "ad":  "Liberia",
+        "yil":  2024,
+        "omur":  62.3
+    },
+    {
+        "kod":  "LBY",
+        "ad":  "Libya",
+        "yil":  2024,
+        "omur":  71.1
+    },
+    {
+        "kod":  "LIE",
+        "ad":  "Liechtenstein",
+        "yil":  2024,
+        "omur":  84.2
+    },
+    {
+        "kod":  "LTU",
+        "ad":  "Lithuania",
+        "yil":  2024,
+        "omur":  77.2
+    },
+    {
+        "kod":  "LUX",
+        "ad":  "Luxembourg",
+        "yil":  2024,
+        "omur":  83.2
+    },
+    {
+        "kod":  "MAC",
+        "ad":  "Macao SAR, China",
+        "yil":  2024,
+        "omur":  83.3
+    },
+    {
+        "kod":  "MDG",
+        "ad":  "Madagascar",
+        "yil":  2024,
+        "omur":  63.8
+    },
+    {
+        "kod":  "MWI",
+        "ad":  "Malawi",
+        "yil":  2024,
+        "omur":  67.6
+    },
+    {
+        "kod":  "MYS",
+        "ad":  "Malaysia",
+        "yil":  2024,
+        "omur":  76.8
+    },
+    {
+        "kod":  "MDV",
+        "ad":  "Maldives",
+        "yil":  2024,
+        "omur":  81.3
+    },
+    {
+        "kod":  "MLI",
+        "ad":  "Mali",
+        "yil":  2024,
+        "omur":  60.7
+    },
+    {
+        "kod":  "MLT",
+        "ad":  "Malta",
+        "yil":  2024,
+        "omur":  83.0
+    },
+    {
+        "kod":  "MHL",
+        "ad":  "Marshall Islands",
+        "yil":  2024,
+        "omur":  67.1
+    },
+    {
+        "kod":  "MRT",
+        "ad":  "Mauritania",
+        "yil":  2024,
+        "omur":  68.7
+    },
+    {
+        "kod":  "MUS",
+        "ad":  "Mauritius",
+        "yil":  2024,
+        "omur":  73.8
+    },
+    {
+        "kod":  "MEX",
+        "ad":  "Mexico",
+        "yil":  2024,
+        "omur":  75.3
+    },
+    {
+        "kod":  "FSM",
+        "ad":  "Micronesia, Fed. Sts.",
+        "yil":  2024,
+        "omur":  67.4
+    },
+    {
+        "kod":  "MDA",
+        "ad":  "Moldova",
+        "yil":  2024,
+        "omur":  71.3
+    },
+    {
+        "kod":  "MCO",
+        "ad":  "Monaco",
+        "yil":  2024,
+        "omur":  86.5
+    },
+    {
+        "kod":  "MNG",
+        "ad":  "Mongolia",
+        "yil":  2024,
+        "omur":  72.4
+    },
+    {
+        "kod":  "MNE",
+        "ad":  "Montenegro",
+        "yil":  2024,
+        "omur":  77.9
+    },
+    {
+        "kod":  "MAR",
+        "ad":  "Morocco",
+        "yil":  2024,
+        "omur":  75.5
+    },
+    {
+        "kod":  "MOZ",
+        "ad":  "Mozambique",
+        "yil":  2024,
+        "omur":  63.8
+    },
+    {
+        "kod":  "MMR",
+        "ad":  "Myanmar",
+        "yil":  2024,
+        "omur":  67.1
+    },
+    {
+        "kod":  "NAM",
+        "ad":  "Namibia",
+        "yil":  2024,
+        "omur":  67.5
+    },
+    {
+        "kod":  "NRU",
+        "ad":  "Naoero",
+        "yil":  2024,
+        "omur":  62.3
+    },
+    {
+        "kod":  "NPL",
+        "ad":  "Nepal",
+        "yil":  2024,
+        "omur":  70.6
+    },
+    {
+        "kod":  "NLD",
+        "ad":  "Netherlands",
+        "yil":  2024,
+        "omur":  82.0
+    },
+    {
+        "kod":  "NCL",
+        "ad":  "New Caledonia",
+        "yil":  2024,
+        "omur":  78.9
+    },
+    {
+        "kod":  "NZL",
+        "ad":  "New Zealand",
+        "yil":  2024,
+        "omur":  82.0
+    },
+    {
+        "kod":  "NIC",
+        "ad":  "Nicaragua",
+        "yil":  2024,
+        "omur":  75.1
+    },
+    {
+        "kod":  "NER",
+        "ad":  "Niger",
+        "yil":  2024,
+        "omur":  61.4
+    },
+    {
+        "kod":  "NGA",
+        "ad":  "Nigeria",
+        "yil":  2024,
+        "omur":  54.6
+    },
+    {
+        "kod":  "MKD",
+        "ad":  "North Macedonia",
+        "yil":  2024,
+        "omur":  76.6
+    },
+    {
+        "kod":  "MNP",
+        "ad":  "Northern Mariana Islands",
+        "yil":  2024,
+        "omur":  78.9
+    },
+    {
+        "kod":  "NOR",
+        "ad":  "Norway",
+        "yil":  2024,
+        "omur":  83.2
+    },
+    {
+        "kod":  "OMN",
+        "ad":  "Oman",
+        "yil":  2024,
+        "omur":  80.2
+    },
+    {
+        "kod":  "PAK",
+        "ad":  "Pakistan",
+        "yil":  2024,
+        "omur":  67.8
+    },
+    {
+        "kod":  "PLW",
+        "ad":  "Palau",
+        "yil":  2024,
+        "omur":  69.4
+    },
+    {
+        "kod":  "PAN",
+        "ad":  "Panama",
+        "yil":  2024,
+        "omur":  79.8
+    },
+    {
+        "kod":  "PNG",
+        "ad":  "Papua New Guinea",
+        "yil":  2024,
+        "omur":  66.3
+    },
+    {
+        "kod":  "PRY",
+        "ad":  "Paraguay",
+        "yil":  2024,
+        "omur":  74.0
+    },
+    {
+        "kod":  "PER",
+        "ad":  "Peru",
+        "yil":  2024,
+        "omur":  77.9
+    },
+    {
+        "kod":  "PHL",
+        "ad":  "Philippines",
+        "yil":  2024,
+        "omur":  69.9
+    },
+    {
+        "kod":  "POL",
+        "ad":  "Poland",
+        "yil":  2024,
+        "omur":  78.4
+    },
+    {
+        "kod":  "PRT",
+        "ad":  "Portugal",
+        "yil":  2024,
+        "omur":  82.4
+    },
+    {
+        "kod":  "PRI",
+        "ad":  "Puerto Rico (US)",
+        "yil":  2024,
+        "omur":  81.9
+    },
+    {
+        "kod":  "QAT",
+        "ad":  "Qatar",
+        "yil":  2024,
+        "omur":  82.5
+    },
+    {
+        "kod":  "ROU",
+        "ad":  "Romania",
+        "yil":  2024,
+        "omur":  76.5
+    },
+    {
+        "kod":  "RUS",
+        "ad":  "Russian Federation",
+        "yil":  2024,
+        "omur":  73.4
+    },
+    {
+        "kod":  "RWA",
+        "ad":  "Rwanda",
+        "yil":  2024,
+        "omur":  68.0
+    },
+    {
+        "kod":  "WSM",
+        "ad":  "Samoa",
+        "yil":  2024,
+        "omur":  71.8
+    },
+    {
+        "kod":  "SMR",
+        "ad":  "San Marino",
+        "yil":  2024,
+        "omur":  85.8
+    },
+    {
+        "kod":  "STP",
+        "ad":  "Sao Tome and Principe",
+        "yil":  2024,
+        "omur":  69.9
+    },
+    {
+        "kod":  "SAU",
+        "ad":  "Saudi Arabia",
+        "yil":  2024,
+        "omur":  79.0
+    },
+    {
+        "kod":  "SEN",
+        "ad":  "Senegal",
+        "yil":  2024,
+        "omur":  68.9
+    },
+    {
+        "kod":  "SRB",
+        "ad":  "Serbia",
+        "yil":  2024,
+        "omur":  76.0
+    },
+    {
+        "kod":  "SYC",
+        "ad":  "Seychelles",
+        "yil":  2024,
+        "omur":  76.3
+    },
+    {
+        "kod":  "SLE",
+        "ad":  "Sierra Leone",
+        "yil":  2024,
+        "omur":  62.0
+    },
+    {
+        "kod":  "SGP",
+        "ad":  "Singapore",
+        "yil":  2024,
+        "omur":  83.3
+    },
+    {
+        "kod":  "SXM",
+        "ad":  "Sint Maarten (Dutch part)",
+        "yil":  2024,
+        "omur":  76.5
+    },
+    {
+        "kod":  "SVK",
+        "ad":  "Slovak Republic",
+        "yil":  2024,
+        "omur":  78.4
+    },
+    {
+        "kod":  "SVN",
+        "ad":  "Slovenia",
+        "yil":  2024,
+        "omur":  82.3
+    },
+    {
+        "kod":  "SLB",
+        "ad":  "Solomon Islands",
+        "yil":  2024,
+        "omur":  70.7
+    },
+    {
+        "kod":  "SOM",
+        "ad":  "Somalia, Fed. Rep.",
+        "yil":  2024,
+        "omur":  59.0
+    },
+    {
+        "kod":  "ZAF",
+        "ad":  "South Africa",
+        "yil":  2024,
+        "omur":  66.3
+    },
+    {
+        "kod":  "SSD",
+        "ad":  "South Sudan",
+        "yil":  2024,
+        "omur":  57.7
+    },
+    {
+        "kod":  "ESP",
+        "ad":  "Spain",
+        "yil":  2024,
+        "omur":  83.9
+    },
+    {
+        "kod":  "LKA",
+        "ad":  "Sri Lanka",
+        "yil":  2024,
+        "omur":  77.7
+    },
+    {
+        "kod":  "KNA",
+        "ad":  "St. Kitts and Nevis",
+        "yil":  2024,
+        "omur":  72.3
+    },
+    {
+        "kod":  "LCA",
+        "ad":  "St. Lucia",
+        "yil":  2024,
+        "omur":  72.8
+    },
+    {
+        "kod":  "MAF",
+        "ad":  "St. Martin (French part)",
+        "yil":  2024,
+        "omur":  80.4
+    },
+    {
+        "kod":  "VCT",
+        "ad":  "St. Vincent and the Grenadines",
+        "yil":  2024,
+        "omur":  71.4
+    },
+    {
+        "kod":  "SDN",
+        "ad":  "Sudan",
+        "yil":  2024,
+        "omur":  66.5
+    },
+    {
+        "kod":  "SUR",
+        "ad":  "Suriname",
+        "yil":  2024,
+        "omur":  73.8
+    },
+    {
+        "kod":  "SWE",
+        "ad":  "Sweden",
+        "yil":  2024,
+        "omur":  84.1
+    },
+    {
+        "kod":  "CHE",
+        "ad":  "Switzerland",
+        "yil":  2024,
+        "omur":  84.4
+    },
+    {
+        "kod":  "SYR",
+        "ad":  "Syrian Arab Republic",
+        "yil":  2024,
+        "omur":  72.6
+    },
+    {
+        "kod":  "TJK",
+        "ad":  "Tajikistan",
+        "yil":  2024,
+        "omur":  71.9
+    },
+    {
+        "kod":  "TZA",
+        "ad":  "Tanzania",
+        "yil":  2024,
+        "omur":  67.2
+    },
+    {
+        "kod":  "THA",
+        "ad":  "Thailand",
+        "yil":  2024,
+        "omur":  76.6
+    },
+    {
+        "kod":  "TLS",
+        "ad":  "Timor-Leste",
+        "yil":  2024,
+        "omur":  67.9
+    },
+    {
+        "kod":  "TGO",
+        "ad":  "Togo",
+        "yil":  2024,
+        "omur":  62.9
+    },
+    {
+        "kod":  "TON",
+        "ad":  "Tonga",
+        "yil":  2024,
+        "omur":  73.1
+    },
+    {
+        "kod":  "TTO",
+        "ad":  "Trinidad and Tobago",
+        "yil":  2024,
+        "omur":  73.6
+    },
+    {
+        "kod":  "TUN",
+        "ad":  "Tunisia",
+        "yil":  2024,
+        "omur":  76.7
+    },
+    {
+        "kod":  "TUR",
+        "ad":  "Turkiye",
+        "yil":  2024,
+        "omur":  77.4
+    },
+    {
+        "kod":  "TKM",
+        "ad":  "Turkmenistan",
+        "yil":  2024,
+        "omur":  70.2
+    },
+    {
+        "kod":  "TCA",
+        "ad":  "Turks and Caicos Islands",
+        "yil":  2024,
+        "omur":  78.2
+    },
+    {
+        "kod":  "TUV",
+        "ad":  "Tuvalu",
+        "yil":  2024,
+        "omur":  67.3
+    },
+    {
+        "kod":  "UGA",
+        "ad":  "Uganda",
+        "yil":  2024,
+        "omur":  68.5
+    },
+    {
+        "kod":  "UKR",
+        "ad":  "Ukraine",
+        "yil":  2024,
+        "omur":  74.7
+    },
+    {
+        "kod":  "ARE",
+        "ad":  "United Arab Emirates",
+        "yil":  2024,
+        "omur":  83.1
+    },
+    {
+        "kod":  "GBR",
+        "ad":  "United Kingdom",
+        "yil":  2024,
+        "omur":  81.4
+    },
+    {
+        "kod":  "USA",
+        "ad":  "United States",
+        "yil":  2024,
+        "omur":  78.9
+    },
+    {
+        "kod":  "URY",
+        "ad":  "Uruguay",
+        "yil":  2024,
+        "omur":  78.3
+    },
+    {
+        "kod":  "UZB",
+        "ad":  "Uzbekistan",
+        "yil":  2024,
+        "omur":  72.5
+    },
+    {
+        "kod":  "VUT",
+        "ad":  "Vanuatu",
+        "yil":  2024,
+        "omur":  71.7
+    },
+    {
+        "kod":  "VEN",
+        "ad":  "Venezuela, RB",
+        "yil":  2024,
+        "omur":  72.7
+    },
+    {
+        "kod":  "VNM",
+        "ad":  "Viet Nam",
+        "yil":  2024,
+        "omur":  74.7
+    },
+    {
+        "kod":  "VIR",
+        "ad":  "Virgin Islands (U.S.)",
+        "yil":  2024,
+        "omur":  80.8
+    },
+    {
+        "kod":  "PSE",
+        "ad":  "West Bank and Gaza",
+        "yil":  2024,
+        "omur":  69.2
+    },
+    {
+        "kod":  "YEM",
+        "ad":  "Yemen, Rep.",
+        "yil":  2024,
+        "omur":  69.4
+    },
+    {
+        "kod":  "ZMB",
+        "ad":  "Zambia",
+        "yil":  2024,
+        "omur":  66.5
+    },
+    {
+        "kod":  "ZWE",
+        "ad":  "Zimbabwe",
+        "yil":  2024,
+        "omur":  63.1
+    }
+]
