@@ -65,12 +65,16 @@ double yaslanmaPayi(int yas, double omur) {
   return toplam <= 0 ? 0.0 : yaslanma / toplam;
 }
 
+// Bir yaş için 0 ile 1 arasında bir zar değeri döndüren fonksiyon.
+// Normal hayatta her çağrıda rastgele; günlük meydan okumada yaşa göre sabittir.
+typedef Zar = double Function(int yas);
+
 // yas yaşından başlayan adim yıl içinde ölüm olur mu? Olursa ölüm yaşını,
-// olmazsa null döndürür.
-int? olumYasi(int yas, int adim, double omur, int saglik, Random r) {
+// olmazsa null döndürür. Zar değeri ölüm olasılığından küçükse ölünür.
+int? olumYasi(int yas, int adim, double omur, int saglik, Zar zar) {
   for (var i = 0; i < adim; i++) {
     final y = yas + i;
-    if (r.nextDouble() < yillikRisk(y, omur, saglik)) return y;
+    if (zar(y) < yillikRisk(y, omur, saglik)) return y;
   }
   return null;
 }

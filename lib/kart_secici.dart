@@ -21,7 +21,8 @@ final List<Karar> _tumKartlar = [
 
 // Yaşa, hayatın etiketlerine, ülkenin risk skorlarına ve geçmişe uygun,
 // ağırlıklı rastgele bir kart seçer. Olay kartları yalnızca ülke için gerçek
-// risk verisi varsa ve skor eşiği aşıyorsa çıkar.
+// risk verisi varsa ve skor eşiği aşıyorsa çıkar. rnd verilirse seçim ondan
+// yapılır (günlük meydan okumada herkes için aynı).
 // omur şimdilik kullanılmıyor; çağıranları değiştirmemek için duruyor.
 Karar yeniKartSec(
   int yas,
@@ -29,7 +30,10 @@ Karar yeniKartSec(
   Set<String> etiketler, {
   UlkeRiskleri? risk,
   double omur = 85,
+  Random? rnd,
 }) {
+  final r = rnd ?? _rastgele;
+
   bool uygun(Karar k) {
     if (yas < k.minYas || yas > k.maxYas) return false;
     if (!k.gerek.every((e) => etiketler.contains(e))) return false;
@@ -67,7 +71,7 @@ Karar yeniKartSec(
   if (aday.isEmpty) aday = yasaUygun;
 
   final toplam = aday.fold<double>(0, (t, k) => t + agirlik(k));
-  var x = _rastgele.nextDouble() * toplam;
+  var x = r.nextDouble() * toplam;
   for (final k in aday) {
     x -= agirlik(k);
     if (x <= 0) return k;

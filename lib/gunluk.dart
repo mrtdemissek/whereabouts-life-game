@@ -20,6 +20,18 @@ Ulke gununUlkesi(List<Ulke> ulkeler) {
   return sirali[Random(tohum).nextInt(sirali.length)];
 }
 
+// Günün meydan okuması için ortak tohum: aynı gün ve aynı ülke için herkeste
+// aynıdır. Zarlar, kartlar ve karakterin görünümü bundan türetilir.
+int gunlukTohum(String ulkeKodu) {
+  final d = DateTime.now();
+  final gun = d.year * 10000 + d.month * 100 + d.day;
+  var h = 17;
+  for (final c in ulkeKodu.codeUnits) {
+    h = (h * 31 + c) & 0x7fffffff;
+  }
+  return gun * 1000003 + h;
+}
+
 class GunlukDurum {
   final bool bugunTamam;
   final int seri;

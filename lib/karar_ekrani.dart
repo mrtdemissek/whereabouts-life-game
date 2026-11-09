@@ -66,6 +66,8 @@ class KararEkrani extends StatefulWidget {
 
 class _KararEkraniState extends State<KararEkrani> {
   final Random _r = Random();
+  // Günlük meydan okumada herkes için aynı tohum
+  late final int _tohum = gunlukTohum(widget.ulke.kod);
   int yas = baslangicYasi;
   int zaman = 50;
   int para = 50;
@@ -96,11 +98,23 @@ class _KararEkraniState extends State<KararEkrani> {
   // Ülke, ölüm yaşı bu değere eşit ya da büyükse tamamlanır
   int get omurSuresi => widget.ulke.omur.round();
 
+  // Rastgelelik kaynağı. Günlük meydan okumada seçilen amaç (tuz) ve yaş için
+  // sabit; normal hayatta her seferinde rastgele.
+  // tuz: 1 kart seçimi, 2 aile hikâyesi, 3 ölüm nedeni
+  Random _rnd(int tuz, int y) =>
+      widget.gunluk ? Random(_tohum + tuz * 100003 + y) : _r;
+
+  // Bir yaş için ölüm zarı: günlükte yaşa göre sabit, normalde rastgele
+  double _zar(int y) => widget.gunluk
+      ? Random(_tohum + 4 * 100003 + y).nextDouble()
+      : _r.nextDouble();
+
   @override
   void initState() {
     super.initState();
-    ten = _tenler[_r.nextInt(_tenler.length)];
-    gomlek = _gomlekler[_r.nextInt(_gomlekler.length)];
+    final g = widget.gunluk ? Random(_tohum) : _r;
+    ten = _tenler[g.nextInt(_tenler.length)];
+    gomlek = _gomlekler[g.nextInt(_gomlekler.length)];
     riskleriYukle().then((harita) {
       risk = harita[widget.ulke.kod];
     });
@@ -116,7 +130,7 @@ class _KararEkraniState extends State<KararEkrani> {
     yas = y;
     tamamlandi = y >= omurSuresi;
     olumNedeni = tur == _Bitis.olum
-        ? olumNedeniSec(y, widget.ulke.omur, risk, _r)
+        ? olumNedeniSec(y, widget.ulke.omur, risk, _rnd(3, y))
         : null;
   }
 
@@ -127,6 +141,7 @@ class _KararEkraniState extends State<KararEkrani> {
       etiketler,
       risk: risk,
       omur: widget.ulke.omur,
+      rnd: _rnd(1, yas),
     );
     kart = k;
     gecmis.add(k);
@@ -134,7 +149,12 @@ class _KararEkraniState extends State<KararEkrani> {
 
   // Bu yaşın aile hikâyesini seçer ve etkisini ölçülere uygular
   void _olayiSec() {
-    final o = aileOlayiSec(yas, widget.ulke.omur, kullanilanOlaylar, _r);
+    final o = aileOlayiSec(
+      yas,
+      widget.ulke.omur,
+      kullanilanOlaylar,
+      _rnd(2, yas),
+    );
     olay = o;
     kullanilanOlaylar.add(o.id);
     zaman = _sinirla(zaman + o.etki.zaman);
@@ -178,7 +198,7 @@ class _KararEkraniState extends State<KararEkrani> {
   // Bebeklik ve erken çocukluk: kararları aile verir, oyuncu yalnızca devam eder
   void bebeklikDevam() {
     final onceki = [zaman, para, saglik, iliski];
-    final olum = olumYasi(yas, 1, widget.ulke.omur, saglik, _r);
+    final olum = olumYasi(yas, 1, widget.ulke.omur, saglik, _zar);
     setState(() {
       if (olum != null) {
         _bitir(_Bitis.olum, olum);
@@ -221,7 +241,7 @@ class _KararEkraniState extends State<KararEkrani> {
       if (saglik == 0) {
         _bitir(_Bitis.saglik, yas);
       } else {
-        final olum = olumYasi(yas, yilAdimi, widget.ulke.omur, saglik, _r);
+        final olum = olumYasi(yas, yilAdimi, widget.ulke.omur, saglik, _zar);
         if (olum != null) {
           _bitir(_Bitis.olum, olum);
         } else {
@@ -374,7 +394,20 @@ class _KararEkraniState extends State<KararEkrani> {
                   if (widget.gunluk)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: Text(context.t('gunluk_banner')),
+                      child: Column(
+                        children: [
+                          Text(
+                            context.t('gunluk_banner'),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            context.t('gunluk_zar'),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                        ],
+                      ),
                     ),
                   Olcu(OlcuTuru.zaman, zaman),
                   Olcu(OlcuTuru.para, para),
