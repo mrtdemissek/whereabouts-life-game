@@ -1,6 +1,6 @@
 {
-    "name": "hayat_oyunu",
-    "short_name": "hayat_oyunu",
+    "name": "Whereabouts",
+    "short_name": "Whereabouts",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

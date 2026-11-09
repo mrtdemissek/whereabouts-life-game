@@ -12,11 +12,11 @@ Future<void> main() async {
   await genelYerel.yukle();
   await Ses.ornek.yukle();
   await Muzik.ornek.yukle();
-  runApp(YerelKapsam(yerel: genelYerel, child: const HayatOyunu()));
+  runApp(YerelKapsam(yerel: genelYerel, child: const WhereaboutsApp()));
 }
 
-class HayatOyunu extends StatelessWidget {
-  const HayatOyunu({super.key});
+class WhereaboutsApp extends StatelessWidget {
+  const WhereaboutsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
