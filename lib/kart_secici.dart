@@ -2,6 +2,7 @@ import 'dart:math';
 import 'karar.dart';
 import 'kartlar2.dart';
 import 'olaylar.dart';
+import 'olaylar2.dart';
 import 'risk.dart';
 import 'zincir.dart';
 
@@ -19,6 +20,7 @@ final List<Karar> _tumKartlar = [
   ...yeniKararlar,
   ...zincirKartlari,
   ...olayKartlari,
+  ...olayKartlari2,
 ];
 
 // Yaşa, hayatın etiketlerine, ülkenin risk skorlarına ve geçmişe uygun,

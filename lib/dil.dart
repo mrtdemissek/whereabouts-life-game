@@ -8,6 +8,7 @@ import 'diller/tr_sonuc.dart';
 import 'diller/tr_zincir.dart';
 import 'diller/tr_neden.dart';
 import 'diller/tr_olay.dart';
+import 'diller/tr_olay2.dart';
 import 'diller/tr_ses.dart';
 import 'diller/tr_gunluk.dart';
 import 'diller/en.dart';
@@ -18,6 +19,7 @@ import 'diller/en_sonuc.dart';
 import 'diller/en_zincir.dart';
 import 'diller/en_neden.dart';
 import 'diller/en_olay.dart';
+import 'diller/en_olay2.dart';
 import 'diller/en_ses.dart';
 import 'diller/en_gunluk.dart';
 
@@ -43,6 +45,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...trZincir,
     ...trNeden,
     ...trOlay,
+    ...trOlay2,
     ...trSes,
     ...trGunluk,
   },
@@ -55,6 +58,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...enZincir,
     ...enNeden,
     ...enOlay,
+    ...enOlay2,
     ...enSes,
     ...enGunluk,
   },
