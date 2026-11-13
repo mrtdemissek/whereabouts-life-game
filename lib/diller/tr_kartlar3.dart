@@ -1,0 +1,123 @@
+// Üçüncü grup kartların metinleri
+const Map<String, String> trKartlar3 = {
+  'k98_metin': 'Büyükbaban bahçede ceviz topluyor ve sana yardım etmeni istiyor. Ama bugün ödevin de bitmedi.',
+  'k98_sol': 'Ödevine dön',
+  'k98_sag': 'Ceviz topla',
+  'k98_sol_son': 'Ödevini bitirdin ve akşam boş kaldın. Büyükbaban bu kez cevizleri tek başına topladı.',
+  'k98_sag_son': 'Büyükbabanla cevizleri topladın. Ellerin kararsa da akşam onun hikâyelerini dinledin.',
+
+  'k99_metin': 'Kardeşin en sevdiğin topla oynamak istiyor. Sen de tam oyunun ortasındasın.',
+  'k99_sol': 'Sırayla oyna',
+  'k99_sag': 'Oyununa devam et',
+  'k99_sol_son': 'Sırayla oynadınız. Oyun uzadı, ama kardeşin sana çok teşekkür etti.',
+  'k99_sag_son': 'Oyununa devam ettin. Kardeşin küstü, akşam seninle konuşmadı.',
+
+  'k100_metin': 'Gece su içmek için mutfağa inerken karanlıkta garip bir ses duydun. Annen odasında uyuyor.',
+  'k100_sol': 'Yatağına geri dön',
+  'k100_sag': 'Sesin kaynağına bak',
+  'k100_sol_son': 'Yatağına döndün ama uyuyamadın. Sabah yorgun uyandın, annene de bir şey söylemedin.',
+  'k100_sag_son': 'Ses pencereden esen rüzgârmış. Korkunu yendin, ama uyumak için epey geç oldu.',
+
+  'k101_metin': 'Arkadaşların kaykay öğretmeye hazır. Düşeceğinden korkuyorsun ama denemek istiyorsun.',
+  'k101_sol': 'Denemeye kalk',
+  'k101_sag': 'Eve dön',
+  'k101_sol_son': 'Kaykayda iki kez düştün ama üçüncüde durdun. Arkadaşların seni alkışladı.',
+  'k101_sag_son': 'Eve dönüp kitabını okudun. Arkadaşların sana sitem etti, ama akşamın boş kaldı.',
+
+  'k102_metin': 'Dere kenarında oyun oynuyorsun. Annen su kovasını getirmeni istedi, akşam yemeği hazırlanıyor.',
+  'k102_sol': 'Suyu hemen taşı',
+  'k102_sag': 'Oyuna devam et',
+  'k102_sol_son': 'Suyu hızla taşıdın. Kollarında yorgunluk kaldı ama annen akşam seni gururla andı.',
+  'k102_sag_son': 'Oyunda çok eğlendin. Ama annen suyu kendi başına taşıdı ve yemek geç kaldı.',
+
+  'k103_metin': 'Arkadaşına söz verdin: Yarın onunla resim yapacaksın. Büyükannen de o sabah pazara seninle gitmek istiyor.',
+  'k103_sol': 'Büyükannene eşlik et',
+  'k103_sag': 'Sözünde dur',
+  'k103_sol_son': 'Büyükannenle pazara gittin. Sepet ağırdı, ama dönüşte sana dondurma aldı.',
+  'k103_sag_son': 'Arkadaşınla resim yaptın ve sözünü tuttun. Büyükannen ise hayal kırıklığına uğradı.',
+
+  'k104_metin': 'Asansör bozuk, dördüncü kata çıkman gerek. Aşağıdaki komşun ağır market poşetlerini taşımanı istiyor.',
+  'k104_sol': 'Doğrudan eve çık',
+  'k104_sag': 'Komşuna yardım et',
+  'k104_sol_son': 'Doğrudan eve çıktın. Nefes nefese kaldın, ama akşam ödevine erken başladın.',
+  'k104_sag_son': 'Poşetleri taşıdın. Komşun harçlık verdi, ama eve çıkana kadar epey yoruldun.',
+
+  'k105_metin': 'Evde içecek su bitmek üzere. Kuyu uzakta ve yol kayganlaştı. Yarın önemli bir sınavın var.',
+  'k105_sol': 'Kuyudan su taşı',
+  'k105_sag': 'Sınavına çalış',
+  'k105_sol_son': 'Suları taşıdın. Ailen sana minnet duydu, ama bu akşam ders çalışacak zamanın kalmadı.',
+  'k105_sag_son': 'Ders çalıştın ve akşamı erken bitirdin. Ama su sıkıntısı sürdü, annen çok yorgun düştü.',
+
+  'k106_metin': 'Okulda yüzme ve resim kursları açıldı. İkisine de yazılabilirsin, ama haftalık programın çok dolu olacak.',
+  'k106_sol': 'Sadece resme yazıl',
+  'k106_sag': 'İkisine de yazıl',
+  'k106_sol_son': 'Sadece resim kursuna yazıldın. Boyalarla çok eğlendin, ama yüzme arkadaşların uzaklaştı.',
+  'k106_sag_son': 'İki kursa da yazıldın. Haftan yoğun geçti, ama yüzmede ilk kez kulaç attın.',
+
+  'k107_metin': 'Gökyüzü pırıl pırıl, yıldızlar belirmeye başladı. Ailen bahçede birlikte gözlem yapmanı istiyor.',
+  'k107_sol': 'Ailenle gözlem yap',
+  'k107_sag': 'Yatağına geç',
+  'k107_sol_son': 'Yıldızları birlikte saydınız. Gözlerin kapanmaya başladı, ama çok güzel bir akşam oldu.',
+  'k107_sag_son': 'Erken yattın ve sabah dinç uyandın. Ailen gözlemi yaptı, ama sen yıldızları kaçırdın.',
+
+  'k108_metin': 'Yıllardır konuşmadığın bir kardeşin var. Bayramda bile birbirinize mesaj atmıyorsunuz.',
+  'k108_sol': 'Ortak bir dosta sor',
+  'k108_sag': 'Kendin ara',
+  'k108_sol_son': 'Ortak dostunuzla haber yolladın. Kapı aralandı ama ikiniz de hâlâ çekingensiniz.',
+  'k108_sag_son': 'Telefonu açtın. Konuşma saatler sürdü, zor oldu ama ikiniz de rahatladınız.',
+
+  'k109_metin': 'Asansör yine bozuk. Market poşetleri dördüncü kata çıkarken ağır geliyor.',
+  'k109_sol': 'Poşetleri kendin taşı',
+  'k109_sag': 'Komşuya seslen',
+  'k109_sol_son': 'Poşetleri dört kat merdivenden tek tek taşıdın. Dizlerin sızlıyor ama kimseye yük olmadın.',
+  'k109_sag_son': 'Komşun poşetleri kapına kadar taşıdı. Sen de çay ikram ettin, kısa ve sıcak bir sohbet oldu.',
+
+  'k110_metin': 'Annenden kalan eşyalarla dolu bir dolap var. Neyi saklayacağını, neyi vereceğini bilemiyorsun.',
+  'k110_sol': 'Çoğunu bağışla',
+  'k110_sag': 'Kardeşinle incele',
+  'k110_sol_son': 'Eşyaların çoğunu bir günde bağışladın. Hızlı bitti, ama kardeşine danışmamak içine dert oldu.',
+  'k110_sag_son': 'Her parçayı kardeşinle birlikte incelediniz. Gözün doldu, ama eski anılar sizi güldürdü.',
+
+  'k111_metin': 'Çocukların sana tablet hediye etti. Görüntülü görüşme nasıl açılır, hiç bilmiyorsun.',
+  'k111_sol': 'Kılavuzu adım adım oku',
+  'k111_sag': 'Çocuğunu ara, sor',
+  'k111_sol_son': 'Kılavuzu baştan sona okudun. Bir saatte öğrendin, kendinle gurur duydun ama vakit kaybettin.',
+  'k111_sag_son': 'Çocuğunu aradın. Birkaç dakikada bağlandınız. Yüzünü görmek sevindirdi, ama sen de biraz gerildin.',
+
+  'k112_metin': 'Bahçedeki elma ağacı bu yıl ilk kez çok meyve verdi. Toplamak için gücün var mı?',
+  'k112_sol': 'Yardım tut',
+  'k112_sag': 'Kendin topla',
+  'k112_sol_son': 'Genç bir çocuk ağacı bir günde boşalttı. Ücretini ödedin, cebin hafifledi ama yorulmadın.',
+  'k112_sag_son': 'Bütün günü ağaçta geçirdin. Ücret ödemedin ama dizlerin sızladı ve elmaların bir kısmı çürüdü.',
+
+  'k113_metin': 'Vasiyetini yazmanın vakti geldi. Çocuklarınla konuşarak mı yazsan, kendi başına mı?',
+  'k113_sol': 'Kendi başına yaz',
+  'k113_sag': 'Aileyle konuş',
+  'k113_sol_son': 'Vasiyetini sessizce yazıp kaldırdın. İçin rahatladı, ama çocukların bir gün şaşırabilir.',
+  'k113_sag_son': 'Uzun ve zor bir konuşma oldu. Gözler doldu, ama herkes ne istediğini artık biliyor.',
+
+  'k114_metin': 'Evin çatısı yağmurda akıyor. Yağmur yarın da sürecek gibi görünüyor.',
+  'k114_sol': 'Kendin yama yap',
+  'k114_sag': 'Ustayı çağır',
+  'k114_sol_son': 'Çatıya kendin çıkıp yamadın. Yağmuru durdurdun ama dizlerin ve belin ağrıyor.',
+  'k114_sag_son': 'Usta bir öğleden sonra geldi, işi kısa sürede bitirdi. Hesabı ödeyince bütçen daraldı.',
+
+  'k115_metin': 'Yıllardır her sabah oturduğun kafe kapanıyor. Dostların başka bir yerde buluşmak istiyor.',
+  'k115_sol': 'Evde kahveni yap',
+  'k115_sag': 'Dostlarla buluş',
+  'k115_sol_son': 'Evde kendi kahveni demledin. Zaman ve para kazandın, ama dostların seni özledi.',
+  'k115_sag_son': 'Yeni kafede dostlarınla buluştun. Yol uzundu, kahve pahalıydı, ama sohbet çok güzeldi.',
+
+  'k116_metin': 'Gaz tüpün bitmek üzere. Yenisi pahalı, soğuk geceler de başladı.',
+  'k116_sol': 'Uzak bayiye git',
+  'k116_sag': 'Tanıdık tüpçüyü ara',
+  'k116_sol_son': 'Uzak bayiden ucuza aldın, ama yolda bütün gün gitti ve belin ağrıdı.',
+  'k116_sag_son': 'Tanıdık tüpçü bir saatte tüpü kapına getirdi. Ücreti biraz fazla geldi ama sıcak bir sohbet ettiniz.',
+
+  'k117_metin': 'Gençliğinde en çok dinlediğin grubun son konseri bu hafta. Bilet pahalı, yolu da uzun.',
+  'k117_sol': 'Evden canlı izle',
+  'k117_sag': 'Biletleri al, git',
+  'k117_sol_son': 'Konseri evden canlı izledin. Yol yorgunluğu yoktu, ama o büyüyü kalabalıkta yaşayamadın.',
+  'k117_sag_son': 'Konsere gittin, bilet ve yol bütçeyi zorladı. Eski şarkılara eşlik ettin, gençliğe döndün sanki.',
+
+};

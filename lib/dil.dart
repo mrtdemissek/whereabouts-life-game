@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'diller/tr.dart';
 import 'diller/tr_kartlar.dart';
 import 'diller/tr_kartlar2.dart';
+import 'diller/tr_kartlar3.dart';
 import 'diller/tr_baglam.dart';
 import 'diller/tr_aile.dart';
 import 'diller/tr_sonuc.dart';
@@ -15,6 +16,7 @@ import 'diller/tr_gunluk.dart';
 import 'diller/en.dart';
 import 'diller/en_kartlar.dart';
 import 'diller/en_kartlar2.dart';
+import 'diller/en_kartlar3.dart';
 import 'diller/en_baglam.dart';
 import 'diller/en_aile.dart';
 import 'diller/en_sonuc.dart';
@@ -42,6 +44,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...trMetin,
     ...trKartlar,
     ...trKartlar2,
+    ...trKartlar3,
     ...trBaglam,
     ...trAile,
     ...trSonuc,
@@ -56,6 +59,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...enMetin,
     ...enKartlar,
     ...enKartlar2,
+    ...enKartlar3,
     ...enBaglam,
     ...enAile,
     ...enSonuc,

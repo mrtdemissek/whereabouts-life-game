@@ -1,0 +1,123 @@
+// Texts of the third card group
+const Map<String, String> enKartlar3 = {
+  'k98_metin': 'Grandpa is gathering walnuts in the garden and needs your help. Your homework isn\'t finished, though.',
+  'k98_sol': 'Back to homework',
+  'k98_sag': 'Pick walnuts with him',
+  'k98_sol_son': 'You finished your homework and had the evening to yourself. Grandpa picked the walnuts alone this time.',
+  'k98_sag_son': 'You picked walnuts with Grandpa. Your hands turned brown, but you listened to his stories all evening.',
+
+  'k99_metin': 'Your sibling wants to play with your favorite ball, right in the middle of your game.',
+  'k99_sol': 'Take turns',
+  'k99_sag': 'Keep playing',
+  'k99_sol_son': 'You took turns. The game dragged on, but your sibling thanked you warmly.',
+  'k99_sag_son': 'You kept playing. Your sibling sulked and would not talk to you that evening.',
+
+  'k100_metin': 'At night, on your way to the kitchen for water, you hear a strange sound. Your parents are asleep.',
+  'k100_sol': 'Go back to bed',
+  'k100_sag': 'Look for the sound',
+  'k100_sol_son': 'You went back to bed but could not fall asleep. You woke up tired and told no one.',
+  'k100_sag_son': 'The sound was the wind through the window. You beat your fear, but it was very late before you slept.',
+
+  'k101_metin': 'Your friends are ready to teach you skateboarding. You are scared of falling, but you want to try.',
+  'k101_sol': 'Get on and try',
+  'k101_sag': 'Head home',
+  'k101_sol_son': 'You fell twice, then stayed up on the third try. Your friends cheered for you.',
+  'k101_sag_son': 'You went home and read your book. Your friends were disappointed, but your evening was free.',
+
+  'k102_metin': 'You are playing by the stream. Your mother asks you to bring a bucket of water; dinner is being prepared.',
+  'k102_sol': 'Carry the water now',
+  'k102_sag': 'Keep playing',
+  'k102_sol_son': 'You carried the water quickly. Your arms ache, but your mother praised you at dinner.',
+  'k102_sag_son': 'You had a great time playing. But your mother carried the water herself, and dinner was late.',
+
+  'k103_metin': 'You promised a friend you would paint together tomorrow. Grandma wants you at the market that same morning.',
+  'k103_sol': 'Join Grandma at market',
+  'k103_sag': 'Keep your promise',
+  'k103_sol_son': 'You went to the market with Grandma. The basket was heavy, but she bought you ice cream on the way home.',
+  'k103_sag_son': 'You painted with your friend and kept your word. Grandma was disappointed, though.',
+
+  'k104_metin': 'The elevator is broken and you live on the fourth floor. A neighbor needs help carrying heavy shopping bags.',
+  'k104_sol': 'Head straight upstairs',
+  'k104_sag': 'Help the neighbor',
+  'k104_sol_son': 'You went straight up. You were out of breath, but you started your homework early.',
+  'k104_sag_son': 'You carried the bags. Your neighbor gave you a small reward, but you were very tired by the time you got upstairs.',
+
+  'k105_metin': 'Drinking water is almost gone. The well is far, the path is slippery, and you have a test tomorrow.',
+  'k105_sol': 'Carry water from the well',
+  'k105_sag': 'Study for the test',
+  'k105_sol_son': 'You carried the water. Your family thanked you, but there is no time left to study tonight.',
+  'k105_sag_son': 'You studied and finished your evening early. But the water shortage continued, and your mother is exhausted.',
+
+  'k106_metin': 'The school opens swimming and drawing classes. You can join both, but your weekly schedule will be packed.',
+  'k106_sol': 'Join only drawing',
+  'k106_sag': 'Join both classes',
+  'k106_sol_son': 'You joined only drawing. You had lots of fun with paints, but your swimming friends drifted away.',
+  'k106_sag_son': 'You joined both classes. The week was busy, but you swam your first real strokes.',
+
+  'k107_metin': 'The sky is clear and the stars are coming out. Your family invites you to stargaze together in the garden.',
+  'k107_sol': 'Stargaze with family',
+  'k107_sag': 'Go to bed early',
+  'k107_sol_son': 'You counted stars together. Your eyes grew heavy, but it was a lovely evening.',
+  'k107_sag_son': 'You went to bed early and woke up rested. Your family stargazed, but you missed the stars.',
+
+  'k108_metin': 'You have not spoken to your sibling in years. You do not even exchange holiday messages.',
+  'k108_sol': 'Ask a mutual friend',
+  'k108_sag': 'Call them yourself',
+  'k108_sol_son': 'A friend passed word along. The door is ajar, but you both still feel shy.',
+  'k108_sag_son': 'You called. The talk lasted hours and was hard, but you both felt lighter afterward.',
+
+  'k109_metin': 'The elevator is broken again. Carrying the shopping up to the fourth floor feels heavier each time.',
+  'k109_sol': 'Carry the bags yourself',
+  'k109_sag': 'Call to your neighbor',
+  'k109_sol_son': 'You carried the bags up four flights, one trip at a time. Your knees ache, but you burdened no one.',
+  'k109_sag_son': 'Your neighbor carried the bags to your door. You offered tea, and you had a short, warm chat.',
+
+  'k110_metin': 'Your mother\'s belongings fill the closet. You are not sure what to keep and what to give away.',
+  'k110_sol': 'Donate most of it',
+  'k110_sag': 'Sort it with your sibling',
+  'k110_sol_son': 'You gave most of it away in one day. It went quickly, but you had not asked your sibling.',
+  'k110_sag_son': 'You sorted each piece together with your sibling. Tears came, but old memories made you both laugh.',
+
+  'k111_metin': 'Your children gave you a tablet. You have no idea how to start a video call.',
+  'k111_sol': 'Read the manual step by step',
+  'k111_sag': 'Ask your child for help',
+  'k111_sol_son': 'You read the manual from start to finish. It took an hour, but you learned it and felt proud.',
+  'k111_sag_son': 'You called and were connected in minutes. Seeing their face warmed you, though you felt a little tense.',
+
+  'k112_metin': 'The apple tree in your garden is loaded with fruit this year. Can you still pick it all?',
+  'k112_sol': 'Hire a helper',
+  'k112_sag': 'Pick them yourself',
+  'k112_sol_son': 'A young helper cleared the tree in a day. You paid, and your purse is lighter, but you were not worn out.',
+  'k112_sag_son': 'You spent the whole day up the ladder. You saved the fee, but your knees ached and some apples rotted.',
+
+  'k113_metin': 'It is time to write your will. Do you talk it over with your children or write it alone?',
+  'k113_sol': 'Write it alone',
+  'k113_sag': 'Talk with the family',
+  'k113_sol_son': 'You quietly wrote your will and put it away. You feel at peace, though it may surprise your children.',
+  'k113_sag_son': 'It was a long, hard talk. There were tears, but now everyone knows your wishes.',
+
+  'k114_metin': 'The roof leaks every time it rains, and the forecast says more rain tomorrow.',
+  'k114_sol': 'Patch it yourself',
+  'k114_sag': 'Call a handyman',
+  'k114_sol_son': 'You climbed up and patched the roof yourself. The leak stopped, but your back and knees ache.',
+  'k114_sag_son': 'The handyman came in the afternoon and finished quickly. Paying him left your budget tight.',
+
+  'k115_metin': 'The café you have visited every morning for years is closing. Your friends want to meet elsewhere.',
+  'k115_sol': 'Make coffee at home',
+  'k115_sag': 'Meet friends elsewhere',
+  'k115_sol_son': 'You brewed your own coffee at home. You saved time and money, but your friends missed you.',
+  'k115_sag_son': 'You met your friends at a new café. The trip was long and the coffee cost more, but the talk was lovely.',
+
+  'k116_metin': 'Your gas cylinder is almost empty. A new one is expensive, and the cold nights have started.',
+  'k116_sol': 'Go to the far depot',
+  'k116_sag': 'Call a dealer you know',
+  'k116_sol_son': 'You bought a cheaper cylinder at the far depot, but the trip took all day and your back ached.',
+  'k116_sag_son': 'A familiar dealer brought it within the hour. It cost a little more, but you had a warm chat.',
+
+  'k117_metin': 'The last concert of the band you loved most in your youth is this week. Tickets are pricey and far away.',
+  'k117_sol': 'Watch it live at home',
+  'k117_sag': 'Buy tickets and go',
+  'k117_sol_son': 'You watched the concert live from home. No travel tiredness, but you missed the crowd\'s magic.',
+  'k117_sag_son': 'You went to the concert. Tickets and travel stretched the budget, but you sang every old song.',
+
+};

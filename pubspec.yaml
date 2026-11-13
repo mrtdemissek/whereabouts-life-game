@@ -29,6 +29,7 @@ flutter:
   assets:
     - assets/ulkeler.json
     - assets/riskler.json
+    - assets/muzik/
 
 flutter_launcher_icons:
   android: true
