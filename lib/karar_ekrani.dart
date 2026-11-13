@@ -88,6 +88,7 @@ class _KararEkraniState extends State<KararEkrani> {
   final Set<String> etiketler = {};
   String? sonucAnahtari; // son seçimin sonuç cümlesinin çeviri anahtarı
   Karar? kart;
+  bool aynali = false; // bu kartın sol ve sağ seçeneği yer değiştirdi mi
   AileOlayi? olay;
   Tepki tepki = Tepki.yok; // karakterin son karara tepkisi
   int tepkiNo = 0;
@@ -102,7 +103,7 @@ class _KararEkraniState extends State<KararEkrani> {
 
   // Rastgelelik kaynağı. Günlük meydan okumada seçilen amaç (tuz) ve yaş için
   // sabit; normal hayatta her seferinde rastgele.
-  // tuz: 1 kart seçimi, 2 aile hikâyesi, 3 ölüm nedeni
+  // tuz: 1 kart seçimi, 2 aile hikâyesi, 3 ölüm nedeni, 5 kart aynalama
   Random _rnd(int tuz, int y) =>
       widget.gunluk ? Tohumlu(_tohum + tuz * 100003 + y) : _r;
 
@@ -147,6 +148,8 @@ class _KararEkraniState extends State<KararEkrani> {
       rnd: _rnd(1, yas),
     );
     kart = k;
+    // Yarı yarıya aynala: hangi yönün neyi verdiği her kartta değişir
+    aynali = _rnd(5, yas).nextBool();
     gecmis.add(k);
   }
 
@@ -224,8 +227,10 @@ class _KararEkraniState extends State<KararEkrani> {
     }
   }
 
-  // sag: kullanıcı sağ seçeneği mi seçti
-  void kararVer(bool sag) {
+  // kaydirilanSag: oyuncu kartı ekranda sağa mı kaydırdı.
+  // Kart aynalıysa ekranın sağı kartın sol seçeneğidir.
+  void kararVer(bool kaydirilanSag) {
+    final sag = aynali ? !kaydirilanSag : kaydirilanSag;
     final k = kart!;
     final e = sag ? k.sag : k.sol;
     final onceki = [zaman, para, saglik, iliski];
@@ -469,14 +474,19 @@ class _KararEkraniState extends State<KararEkrani> {
                     KaydirmaliKart(
                       karar: k!,
                       anahtar: yas,
+                      aynali: aynali,
                       secildi: kararVer,
                     ),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('← ${context.t('${k.id}_sol')}'),
-                        Text('${context.t('${k.id}_sag')} →'),
+                        Text(
+                          '← ${context.t('${k.id}_${aynali ? 'sag' : 'sol'}')}',
+                        ),
+                        Text(
+                          '${context.t('${k.id}_${aynali ? 'sol' : 'sag'}')} →',
+                        ),
                       ],
                     ),
                     if (riskAyiklama && k is OlayKarti)
