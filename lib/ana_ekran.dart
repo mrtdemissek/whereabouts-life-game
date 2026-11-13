@@ -11,6 +11,7 @@ import 'gunluk.dart';
 import 'karar_ekrani.dart';
 import 'kaynaklar_ekrani.dart';
 import 'muzik.dart';
+import 'nasil_oynanir.dart';
 import 'oyuncak.dart';
 import 'rozet_ekrani.dart';
 import 'sahne.dart';
@@ -36,6 +37,16 @@ class _AnaEkranState extends State<AnaEkran> {
     _ulkeler = ulkeleriYukle();
     _durumuYenile();
     Muzik.ornek.cal(MuzikTuru.ana);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _ilkAnlatim());
+  }
+
+  // Oyun ilk kez açıldığında "Nasıl oynanır" kendiliğinden bir kez gösterilir
+  Future<void> _ilkAnlatim() async {
+    if (await nasilGorulduMu()) return;
+    if (!mounted) return;
+    await nasilGoruldu();
+    if (!mounted) return;
+    _git(const NasilOynanirEkrani());
   }
 
   Future<void> _durumuYenile() async {
@@ -109,101 +120,135 @@ class _AnaEkranState extends State<AnaEkran> {
           final ulkeler = snap.data!;
           final gunun = gununUlkesi(ulkeler);
           final ek = _gunluk.bugunTamam ? ' · ${context.t('bugun_tamam')}' : '';
-          return Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  OyuncakKart(
-                    renk: Renk.limon,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 16,
+
+          final atlasKarti = OyuncakKart(
+            renk: Renk.limon,
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Text(
+              context.t('atlas_sayac', {
+                'n': _atlas.tamamSayisi,
+                'm': ulkeler.length,
+              }),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+          );
+
+          // Sahne sabit 400x224 çizilir, boşluğa göre küçülür
+          const sahne = FittedBox(
+            fit: BoxFit.scaleDown,
+            child: SizedBox(
+              width: 400,
+              height: 224,
+              child: Sahne(
+                yas: 30,
+                ten: Color(0xFFD9A066),
+                gomlek: Color(0xFF2E7D32),
+              ),
+            ),
+          );
+
+          final altParcalar = <Widget>[
+            Text(
+              context.t('ana_alt'),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 56,
+                  vertical: 18,
+                ),
+              ),
+              onPressed: () => _dog(ulkeler),
+              child: Text(
+                context.t('dog'),
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            TextButton.icon(
+              onPressed: () => _git(const NasilOynanirEkrani()),
+              icon: const Icon(Icons.help_outline),
+              label: Text(dil == 'tr' ? 'Nasıl oynanır?' : 'How to play'),
+            ),
+            const SizedBox(height: 8),
+            GestureDetector(
+              onTap: () => _git(KararEkrani(ulke: gunun, gunluk: true)),
+              child: OyuncakKart(
+                renk: Renk.nane,
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(
+                      _gunluk.bugunTamam ? Icons.check_circle : Icons.today,
                     ),
-                    child: Text(
-                      context.t('atlas_sayac', {
-                        'n': _atlas.tamamSayisi,
-                        'm': ulkeler.length,
-                      }),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Sahne(
-                    yas: 30,
-                    ten: Color(0xFFD9A066),
-                    gomlek: Color(0xFF2E7D32),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    context.t('ana_alt'),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 56,
-                        vertical: 18,
-                      ),
-                    ),
-                    onPressed: () => _dog(ulkeler),
-                    child: Text(
-                      context.t('dog'),
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  GestureDetector(
-                    onTap: () => _git(KararEkrani(ulke: gunun, gunluk: true)),
-                    child: OyuncakKart(
-                      renk: Renk.nane,
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            _gunluk.bugunTamam
-                                ? Icons.check_circle
-                                : Icons.today,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  context.t('gunluk_baslik', {
-                                    'ulke': gunun.adi(dil),
-                                  }),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Text(
-                                  '${context.t('gunluk_alt', {'seri': _gunluk.seri})}$ek',
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                              ],
+                          Text(
+                            context.t('gunluk_baslik', {
+                              'ulke': gunun.adi(dil),
+                            }),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
-                          const Icon(Icons.chevron_right),
+                          Text(
+                            '${context.t('gunluk_alt', {'seri': _gunluk.seri})}$ek',
+                            style: const TextStyle(fontSize: 14),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
               ),
             ),
+          ];
+
+          return LayoutBuilder(
+            builder: (context, c) {
+              // Çok kısa ekranda hiçbir şey kesilmesin diye kaydırmaya dön
+              if (c.maxHeight < 500) {
+                return Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        atlasKarti,
+                        const SizedBox(height: 16),
+                        sahne,
+                        const SizedBox(height: 16),
+                        ...altParcalar,
+                      ],
+                    ),
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+                child: Column(
+                  children: [
+                    atlasKarti,
+                    const SizedBox(height: 12),
+                    Expanded(child: Center(child: sahne)),
+                    const SizedBox(height: 12),
+                    ...altParcalar,
+                  ],
+                ),
+              );
+            },
           );
         },
       ),
