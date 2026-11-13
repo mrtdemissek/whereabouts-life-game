@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'karar.dart';
+import 'kartlar2.dart';
 import 'olaylar.dart';
 import 'risk.dart';
 import 'zincir.dart';
@@ -15,6 +16,7 @@ const double olayCarpani = 1.0;
 // Normal kartlar, zincir kartlar ve olay kartları birlikte
 final List<Karar> _tumKartlar = [
   ...kararlar,
+  ...yeniKararlar,
   ...zincirKartlari,
   ...olayKartlari,
 ];

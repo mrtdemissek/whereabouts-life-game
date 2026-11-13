@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'diller/tr.dart';
 import 'diller/tr_kartlar.dart';
+import 'diller/tr_kartlar2.dart';
 import 'diller/tr_aile.dart';
 import 'diller/tr_sonuc.dart';
 import 'diller/tr_zincir.dart';
@@ -11,6 +12,7 @@ import 'diller/tr_ses.dart';
 import 'diller/tr_gunluk.dart';
 import 'diller/en.dart';
 import 'diller/en_kartlar.dart';
+import 'diller/en_kartlar2.dart';
 import 'diller/en_aile.dart';
 import 'diller/en_sonuc.dart';
 import 'diller/en_zincir.dart';
@@ -35,6 +37,7 @@ const Map<String, Map<String, String>> _metinler = {
   'tr': {
     ...trMetin,
     ...trKartlar,
+    ...trKartlar2,
     ...trAile,
     ...trSonuc,
     ...trZincir,
@@ -46,6 +49,7 @@ const Map<String, Map<String, String>> _metinler = {
   'en': {
     ...enMetin,
     ...enKartlar,
+    ...enKartlar2,
     ...enAile,
     ...enSonuc,
     ...enZincir,

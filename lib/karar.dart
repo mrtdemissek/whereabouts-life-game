@@ -235,6 +235,8 @@ const kararlar = [
     sol: Etki(zaman: -10, para: -5, iliski: 15),
     sag: Etki(zaman: 10, iliski: -10),
     solEtiket: {'ailevi'},
+    minYas: 19,
+    maxYas: 75,
   ),
   Karar(
     id: 'k25',

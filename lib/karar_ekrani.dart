@@ -25,8 +25,52 @@ import 'konfeti.dart';
 
 const int baslangicYasi = 0;
 const int kartBaslangicYasi = 5; // bundan önce kararları aile verir
-const int yilAdimi = 3; // kartlı dönemde her karar kaç yıl ilerletir
+const int yilAdimi = 3; // 30 yaşından sonra her karar kaç yıl ilerletir
+const int genclikAdimi = 2; // 30 yaşına kadar her karar kaç yıl ilerletir
 const int sifirCezasi = 6; // sıfırdaki her ölçünün sağlığa adım başı zararı
+
+// Bu yaştayken bir karar kaç yıl ilerletir
+int adimBul(int yas) => yas < 30 ? genclikAdimi : yilAdimi;
+
+// Hayatın dönüm noktaları: yaş eşiği ve kısa anahtarı
+const Map<int, String> _donumNoktalari = {
+  6: 'okul',
+  13: 'ergen',
+  18: 'yetiskin',
+  30: 'otuz',
+  40: 'kirk',
+  50: 'elli',
+  65: 'emekli',
+};
+
+const Map<String, String> _donumTr = {
+  'okul': 'Okul yıllarındasın.',
+  'ergen': 'Ergenlik başladı.',
+  'yetiskin': 'Artık yetişkinsin.',
+  'otuz': 'Otuzlu yaşlara girdin.',
+  'kirk': 'Kırklı yaşlara girdin.',
+  'elli': 'Ellili yaşlara girdin.',
+  'emekli': 'Emeklilik çağına geldin.',
+};
+
+const Map<String, String> _donumEn = {
+  'okul': 'You are in your school years.',
+  'ergen': 'Your teenage years begin.',
+  'yetiskin': 'You are an adult now.',
+  'otuz': 'You enter your thirties.',
+  'kirk': 'You enter your forties.',
+  'elli': 'You enter your fifties.',
+  'emekli': 'You reach retirement age.',
+};
+
+// eski yaştan yeni yaşa geçerken aşılan en yüksek dönüm noktası, yoksa null
+String? _donumBul(int eski, int yeni) {
+  String? bulunan;
+  for (final e in _donumNoktalari.entries) {
+    if (eski < e.key && yeni >= e.key) bulunan = e.value;
+  }
+  return bulunan;
+}
 
 // TEST için: true yapınca hayatın etiketleri kartın altında görünür
 const bool etiketleriGoster = false;
@@ -87,6 +131,8 @@ class _KararEkraniState extends State<KararEkrani> {
   final Set<String> kullanilanOlaylar = {};
   final Set<String> etiketler = {};
   String? sonucAnahtari; // son seçimin sonuç cümlesinin çeviri anahtarı
+  int gecenYil = 0; // son seçimden sonra geçen yıl
+  String? donumAnahtari; // son seçimde aşılan dönüm noktası
   Karar? kart;
   bool aynali = false; // bu kartın sol ve sağ seçeneği yer değiştirdi mi
   AileOlayi? olay;
@@ -234,6 +280,8 @@ class _KararEkraniState extends State<KararEkrani> {
     final k = kart!;
     final e = sag ? k.sag : k.sol;
     final onceki = [zaman, para, saglik, iliski];
+    final eskiYas = yas;
+    final adim = adimBul(yas);
     etiketler.addAll(sag ? k.sagEtiket : k.solEtiket);
     sonucAnahtari = '${k.id}_${sag ? 'sag' : 'sol'}_son';
 
@@ -251,11 +299,13 @@ class _KararEkraniState extends State<KararEkrani> {
       if (saglik == 0) {
         _bitir(_Bitis.saglik, yas);
       } else {
-        final olum = olumYasi(yas, yilAdimi, widget.ulke.omur, saglik, _zar);
+        final olum = olumYasi(yas, adim, widget.ulke.omur, saglik, _zar);
         if (olum != null) {
           _bitir(_Bitis.olum, olum);
         } else {
-          yas += yilAdimi;
+          yas += adim;
+          gecenYil = adim;
+          donumAnahtari = _donumBul(eskiYas, yas);
           _sonrakiKart();
         }
       }
@@ -357,9 +407,14 @@ class _KararEkraniState extends State<KararEkrani> {
     );
   }
 
-  // Son seçimin sonucunu anlatan küçük kutu
+  // Son seçimin sonucunu, geçen yılı ve varsa dönüm noktasını anlatan kutu
   Widget _sonucKutusu(BuildContext context) {
     final goster = sonucAnahtari != null && !bitti && yas >= kartBaslangicYasi;
+    final tr = context.yerel.kod == 'tr';
+    final donum = donumAnahtari;
+    final yilMetni = gecenYil > 0
+        ? (tr ? '+$gecenYil yıl geçti' : '+$gecenYil years pass')
+        : '';
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       child: !goster
@@ -370,10 +425,37 @@ class _KararEkraniState extends State<KararEkrani> {
               child: OyuncakKart(
                 renk: Renk.gokMavisi,
                 padding: const EdgeInsets.all(12),
-                child: Text(
-                  context.t(sonucAnahtari!),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      context.t(sonucAnahtari!),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                    if (yilMetni.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        yilMetni,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                    if (donum != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        (tr ? _donumTr[donum] : _donumEn[donum]) ?? '',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
