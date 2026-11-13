@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'karar.dart';
 import 'kartlar2.dart';
+import 'baglam_kartlari.dart';
 import 'olaylar.dart';
 import 'olaylar2.dart';
 import 'risk.dart';
@@ -18,6 +19,7 @@ const double olayCarpani = 1.0;
 final List<Karar> _tumKartlar = [
   ...kararlar,
   ...yeniKararlar,
+  ...baglamKararlari,
   ...zincirKartlari,
   ...olayKartlari,
   ...olayKartlari2,

@@ -6,22 +6,22 @@ import 'karar.dart';
 import 'kart_secici.dart';
 import 'olaylar.dart';
 import 'parcalar.dart';
+import 'oyun_sahnesi.dart';
 import 'kaydirmali_kart.dart';
 import 'hayat_sonu.dart';
 import 'ulke.dart';
 import 'atlas.dart';
 import 'rozet.dart';
 import 'gunluk.dart';
-import 'sahne.dart';
 import 'dil.dart';
 import 'olum.dart';
 import 'oyuncak.dart';
-import 'tema.dart';
 import 'risk.dart';
 import 'ses.dart';
 import 'muzik.dart';
 import 'piksel_karakter.dart';
 import 'konfeti.dart';
+import 'baglam.dart';
 
 const int baslangicYasi = 0;
 const int kartBaslangicYasi = 5; // bundan önce kararları aile verir
@@ -164,6 +164,9 @@ class _KararEkraniState extends State<KararEkrani> {
     final g = widget.gunluk ? Tohumlu(_tohum) : _r;
     ten = _tenler[g.nextInt(_tenler.length)];
     gomlek = _gomlekler[g.nextInt(_gomlekler.length)];
+    // Hayatın bağlamı: ülkenin koşulları ve yaşanılan yer
+    etiketler.add(ulkeTuru(widget.ulke.omur));
+    etiketler.add(g.nextBool() ? 'kent' : 'kir');
     riskleriYukle().then((harita) {
       risk = harita[widget.ulke.kod];
     });
@@ -394,12 +397,12 @@ class _KararEkraniState extends State<KararEkrani> {
 
   Widget _uyari(String metin, {Color? renk}) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 6),
       child: Text(
         metin,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 13,
           fontWeight: FontWeight.w700,
           color: renk,
         ),
@@ -407,58 +410,51 @@ class _KararEkraniState extends State<KararEkrani> {
     );
   }
 
-  // Son seçimin sonucunu, geçen yılı ve varsa dönüm noktasını anlatan kutu
-  Widget _sonucKutusu(BuildContext context) {
+  // Konuşma balonundaki sonuç cümlesi (yoksa null)
+  String? _balonMetni(BuildContext context) {
     final goster = sonucAnahtari != null && !bitti && yas >= kartBaslangicYasi;
+    return goster ? context.t(sonucAnahtari!) : null;
+  }
+
+  // Balonun altındaki küçük yazı: geçen yıl ve varsa dönüm noktası
+  String _altYazi(BuildContext context) {
     final tr = context.yerel.kod == 'tr';
+    final parcalar = <String>[];
+    if (gecenYil > 0) {
+      parcalar.add(tr ? '+$gecenYil yıl geçti' : '+$gecenYil years pass');
+    }
     final donum = donumAnahtari;
-    final yilMetni = gecenYil > 0
-        ? (tr ? '+$gecenYil yıl geçti' : '+$gecenYil years pass')
-        : '';
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      child: !goster
-          ? const SizedBox.shrink(key: ValueKey('bos'))
-          : Padding(
-              key: ValueKey('$sonucAnahtari$yas'),
-              padding: const EdgeInsets.only(bottom: 12),
-              child: OyuncakKart(
-                renk: Renk.gokMavisi,
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      context.t(sonucAnahtari!),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                    if (yilMetni.isNotEmpty) ...[
-                      const SizedBox(height: 6),
-                      Text(
-                        yilMetni,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                    if (donum != null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        (tr ? _donumTr[donum] : _donumEn[donum]) ?? '',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
+    if (donum != null) {
+      final m = tr ? _donumTr[donum] : _donumEn[donum];
+      if (m != null) parcalar.add(m);
+    }
+    return parcalar.join(' · ');
+  }
+
+  // Günlük meydan okuma rozetine dokununca uzun açıklama
+  void _gunlukAcikla() {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(ctx.t('gunluk_banner'), textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Text(
+              ctx.t('gunluk_zar'),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
             ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -466,130 +462,154 @@ class _KararEkraniState extends State<KararEkrani> {
   Widget build(BuildContext context) {
     final sifirda = zaman == 0 || para == 0 || iliski == 0;
     final k = kart;
+    final ust = MediaQuery.of(context).padding.top + kToolbarHeight;
+    // dört ölçü satırı (her biri ~30 px)
+    const izgaraYuksek = 4 * 30.0 + 4;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: Text(
           context.t('oyun_baslik', {
             'ulke': widget.ulke.adi(context.yerel.kod),
             'yas': yas,
           }),
+          style: const TextStyle(fontSize: 18),
         ),
+        actions: [
+          if (widget.gunluk)
+            IconButton(
+              tooltip: context.t('gunluk_banner'),
+              icon: const Icon(Icons.calendar_month),
+              onPressed: _gunlukAcikla,
+            ),
+        ],
       ),
       body: Stack(
         children: [
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.gunluk)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Column(
-                        children: [
-                          Text(
-                            context.t('gunluk_banner'),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            context.t('gunluk_zar'),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                  Olcu(OlcuTuru.zaman, zaman),
-                  Olcu(OlcuTuru.para, para),
-                  Olcu(OlcuTuru.saglik, saglik),
-                  Olcu(OlcuTuru.iliski, iliski),
-                  const SizedBox(height: 16),
-                  Sahne(
-                    yas: yas,
-                    ten: ten,
-                    gomlek: gomlek,
-                    tepki: tepki,
-                    tepkiNo: tepkiNo,
-                    bitti: bitti,
+          // Tam ekran sahne: gökyüzü, dönen dünya, karakter, konuşma balonu
+          Positioned.fill(
+            child: OyunSahnesi(
+              yas: yas,
+              ten: ten,
+              gomlek: gomlek,
+              tepki: tepki,
+              tepkiNo: tepkiNo,
+              bitti: bitti,
+              balon: _balonMetni(context),
+              altYazi: _altYazi(context),
+              balonNo: tepkiNo,
+              tepeOrani: 0.56,
+              ustBosluk: ust + izgaraYuksek + 8,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, ust, 16, 0),
+            child: Column(
+              children: [
+                Olcu(OlcuTuru.zaman, zaman),
+                Olcu(OlcuTuru.para, para),
+                Olcu(OlcuTuru.saglik, saglik),
+                Olcu(OlcuTuru.iliski, iliski),
+                if (!bitti && sifirda)
+                  _uyari(
+                    context.t('sifir_uyari'),
+                    renk: const Color(0xFFE0524D),
                   ),
-                  if (!bitti && sifirda)
-                    _uyari(
-                      context.t('sifir_uyari'),
-                      renk: const Color(0xFFE0524D),
-                    ),
-                  if (!bitti && yas >= omurSuresi)
-                    _uyari(context.t('omur_asildi')),
-                  const SizedBox(height: 16),
-                  _sonucKutusu(context),
-                  if (bitti)
-                    HayatSonuKarti(
-                      mesaj: _bitisMesaji(context),
-                      yeniRozetler: yeniRozetler,
-                      rozetleriGoster: kutlama,
-                      yenidenBasla: () => Navigator.pop(context),
-                    )
-                  else if (yas < kartBaslangicYasi) ...[
-                    Text(
-                      context.t('bebeklik_metin'),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                    const SizedBox(height: 12),
-                    OyuncakKart(
-                      child: Text(
-                        context.t('aile_${olay!.id}'),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                if (!bitti && yas >= omurSuresi)
+                  _uyari(context.t('omur_asildi')),
+                Expanded(
+                  child: bitti
+                      ? SingleChildScrollView(
+                          padding: const EdgeInsets.only(top: 16, bottom: 24),
+                          child: HayatSonuKarti(
+                            mesaj: _bitisMesaji(context),
+                            yeniRozetler: yeniRozetler,
+                            rozetleriGoster: kutlama,
+                            yenidenBasla: () => Navigator.pop(context),
+                          ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (yas < kartBaslangicYasi) ...[
+                              Text(
+                                context.t('bebeklik_metin'),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                              const SizedBox(height: 8),
+                              OyuncakKart(
+                                padding: const EdgeInsets.all(16),
+                                child: Text(
+                                  context.t('aile_${olay!.id}'),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 14),
+                              ElevatedButton(
+                                onPressed: bebeklikDevam,
+                                child: Text(context.t('devam')),
+                              ),
+                            ] else ...[
+                              KaydirmaliKart(
+                                karar: k!,
+                                anahtar: yas,
+                                aynali: aynali,
+                                secildi: kararVer,
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      '← ${context.t('${k.id}_${aynali ? 'sag' : 'sol'}')}',
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Flexible(
+                                    child: Text(
+                                      '${context.t('${k.id}_${aynali ? 'sol' : 'sag'}')} →',
+                                      textAlign: TextAlign.right,
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              if (riskAyiklama && k is OlayKarti)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 6),
+                                  child: Text(
+                                    '[AYIKLAMA] olay kartı: ${k.id} (${k.riskAlan})',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              if (etiketleriGoster)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 6),
+                                  child: Text(
+                                    'Etiketler: ${etiketler.join(', ')}',
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                            ],
+                            SizedBox(
+                              height: 16 +
+                                  MediaQuery.of(context).padding.bottom,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: bebeklikDevam,
-                      child: Text(context.t('devam')),
-                    ),
-                  ] else ...[
-                    KaydirmaliKart(
-                      karar: k!,
-                      anahtar: yas,
-                      aynali: aynali,
-                      secildi: kararVer,
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '← ${context.t('${k.id}_${aynali ? 'sag' : 'sol'}')}',
-                        ),
-                        Text(
-                          '${context.t('${k.id}_${aynali ? 'sol' : 'sag'}')} →',
-                        ),
-                      ],
-                    ),
-                    if (riskAyiklama && k is OlayKarti)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Text(
-                          '[AYIKLAMA] olay kartı: ${k.id} (${k.riskAlan})',
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    if (etiketleriGoster)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Text(
-                          'Etiketler: ${etiketler.join(', ')}',
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ),
-                  ],
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           if (kutlama) const Positioned.fill(child: Konfeti()),
