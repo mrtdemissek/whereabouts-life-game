@@ -35,8 +35,8 @@ class _DogumEkraniState extends State<DogumEkrani> {
 
   Future<void> _dondur() async {
     final r = Random();
-    // Azaltılmış harekette dönme kısa tutulur
-    final adim = MediaQuery.of(context).disableAnimations ? 3 : 22;
+    // Azaltılmış harekette dönme biraz kısa tutulur (yine de çark hissi kalsın)
+    final adim = MediaQuery.of(context).disableAnimations ? 12 : 22;
     for (var i = 0; i < adim; i++) {
       await Future.delayed(Duration(milliseconds: 40 + (i * i) ~/ 2));
       if (!mounted) return;

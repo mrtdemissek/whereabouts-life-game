@@ -90,4 +90,9 @@ const Map<String, String> trOyun = {
   'gunun_meydan_okumasi': 'GÜNÜN MEYDAN OKUMASI',
   'gunluk_kural': 'Beklenen yaşa ulaş',
   'seri': 'Seri',
+  'hareket_baslik': 'Animasyonlar',
+  'hareket_sistem': 'Telefona göre',
+  'hareket_tam': 'Tam',
+  'hareket_azaltilmis': 'Azaltılmış',
+  'hareket_aciklama': 'Telefona göre: telefonda "Hareketi Azalt" açıksa sarsıntı ve uçuşlar yumuşak geçişe döner.',
 };

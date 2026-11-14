@@ -90,4 +90,9 @@ const Map<String, String> enOyun = {
   'gunun_meydan_okumasi': "TODAY'S CHALLENGE",
   'gunluk_kural': 'Reach the expected age',
   'seri': 'Streak',
+  'hareket_baslik': 'Animations',
+  'hareket_sistem': 'System',
+  'hareket_tam': 'Full',
+  'hareket_azaltilmis': 'Reduced',
+  'hareket_aciklama': 'System: if "Reduce Motion" is on, shakes and flying cards become gentle fades.',
 };

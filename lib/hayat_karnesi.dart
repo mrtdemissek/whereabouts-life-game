@@ -172,12 +172,18 @@ class HayatKarnesi extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: TweenAnimationBuilder<double>(
                   tween: Tween<double>(begin: 0.5, end: 1.0),
-                  duration: MediaQuery.of(context).disableAnimations
-                      ? Duration.zero
-                      : const Duration(milliseconds: 800),
-                  curve: Curves.elasticOut,
+                  duration: Duration(
+                    milliseconds:
+                        MediaQuery.of(context).disableAnimations ? 400 : 800,
+                  ),
+                  curve: MediaQuery.of(context).disableAnimations
+                      ? Curves.easeOut
+                      : Curves.elasticOut,
+                  // Azaltılmış harekette büyümez, yalnızca belirir
                   builder: (context, v, child) =>
-                      Transform.scale(scale: v, child: child),
+                      MediaQuery.of(context).disableAnimations
+                          ? Opacity(opacity: ((v - 0.5) * 2).clamp(0.0, 1.0), child: child)
+                          : Transform.scale(scale: v, child: child),
                   child: OyunPanel(
                     renk: Renk.pembe,
                     golge: 0,
@@ -413,7 +419,8 @@ class _PikselYildizState extends State<PikselYildiz> {
   @override
   Widget build(BuildContext context) {
     final hareketsiz = MediaQuery.of(context).disableAnimations;
-    final dolu = widget.dolu && (_gorundu || hareketsiz);
+    // Yıldızlar her durumda sırayla dolar; azaltılmış harekette yalnızca zıplamaz
+    final dolu = widget.dolu && _gorundu;
     final y = Semantics(
       label: widget.dolu ? '★' : '☆',
       child: CustomPaint(

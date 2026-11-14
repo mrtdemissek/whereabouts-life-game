@@ -898,14 +898,12 @@ class _KararEkraniState extends State<KararEkrani> {
               bottom: false,
               child: TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
-                duration: hareketsiz
-                    ? Duration.zero
-                    : const Duration(milliseconds: 900),
+                duration: Duration(milliseconds: hareketsiz ? 500 : 900),
                 curve: Curves.easeOut,
                 builder: (context, v, child) => Opacity(
                   opacity: v,
                   child: Transform.translate(
-                    offset: Offset(0, (1 - v) * 24),
+                    offset: Offset(0, hareketsiz ? 0 : (1 - v) * 24),
                     child: child,
                   ),
                 ),

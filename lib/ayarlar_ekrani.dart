@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dil.dart';
+import 'hareket.dart';
 import 'muzik.dart';
 import 'oyun_ui.dart';
 import 'ses.dart';
@@ -119,6 +120,51 @@ class _AyarlarEkraniState extends State<AyarlarEkrani> {
                 _anahtar(context.t('ses_efekt'), ses.sesAcik, ses.sesAyarla),
                 _anahtar(context.t('muzik'), muzik.acik, muzik.ayarla),
                 _anahtar(context.t('titresim'), ses.titresimAcik, ses.titresimAyarla),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          OyunPanel(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _baslik(context.t('hareket_baslik')),
+                Row(
+                  children: [
+                    for (final m in HareketModu.values) ...[
+                      if (m != HareketModu.values.first) const SizedBox(width: 8),
+                      Expanded(
+                        child: OyunDugme(
+                          yukseklik: 48,
+                          renk: m == HareketAyari.ornek.mod
+                              ? Renk.lavanta
+                              : Renk.kagit,
+                          anlam: context.t('hareket_${m.name}'),
+                          onTap: () async {
+                            await HareketAyari.ornek.sec(m);
+                            if (mounted) setState(() {});
+                          },
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: Text(
+                                context.t('hareket_${m.name}'),
+                                style: Yazi.govde(boyut: 15, kalinlik: FontWeight.w800),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  context.t('hareket_aciklama'),
+                  style: Yazi.govde(boyut: 13, renk: Renk.soluk),
+                ),
               ],
             ),
           ),

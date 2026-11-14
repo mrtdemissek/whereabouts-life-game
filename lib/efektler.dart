@@ -2,8 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'tema.dart';
 
-// Oyun hissi için küçük efektler. Hepsi telefonun "animasyonları azalt"
-// ayarına uyar: o ayar açıkken hareket etmez.
+// Oyun hissi için küçük efektler. Hepsi "Hareketi Azalt" ayarına uyar:
+// o ayar açıkken sarsılma, zıplama ve büyüme yerine yalnızca renk/solma kalır.
 
 // tetik her arttığında çocuğunu kısa ve sönümlü biçimde sarsar
 class Sarsinti extends StatefulWidget {
@@ -25,8 +25,7 @@ class _SarsintiState extends State<Sarsinti>
   @override
   void didUpdateWidget(covariant Sarsinti oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.tetik != oldWidget.tetik &&
-        !MediaQuery.of(context).disableAnimations) {
+    if (widget.tetik != oldWidget.tetik) {
       _c.forward(from: 0);
     }
   }
@@ -44,7 +43,11 @@ class _SarsintiState extends State<Sarsinti>
       child: widget.child,
       builder: (context, child) {
         final t = _c.value;
-        final dx = _c.isAnimating ? sin(t * pi * 7) * (1 - t) * 7 : 0.0;
+        // Azaltılmış harekette sarsılmaz, yalnızca kırmızı kenar parlar
+        final hareketsiz = MediaQuery.of(context).disableAnimations;
+        final dx = _c.isAnimating && !hareketsiz
+            ? sin(t * pi * 7) * (1 - t) * 7
+            : 0.0;
         return Stack(
           children: [
             Transform.translate(offset: Offset(dx, 0), child: child),

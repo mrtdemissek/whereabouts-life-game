@@ -60,11 +60,8 @@ class KaydirmaliKartDurumu extends State<KaydirmaliKart>
     if (ucuyor) return;
     setState(() => _ucusYonu = sagaGit ? 1 : -1);
     Ses.ornek.cal(SesTuru.tik);
-    if (MediaQuery.of(context).disableAnimations) {
-      _ucus.value = 1;
-    } else {
-      await _ucus.forward(from: 0);
-    }
+    // Azaltılmış harekette kart uçmaz, yerinde solar (aynı kısa sürede)
+    await _ucus.forward(from: 0);
     if (!mounted) return;
     Ses.ornek.titret(TitresimTuru.secim);
     widget.secildi(sagaGit);
@@ -85,6 +82,7 @@ class KaydirmaliKartDurumu extends State<KaydirmaliKart>
       guc,
     )!;
     final genislik = MediaQuery.of(context).size.width;
+    final hareketsiz = MediaQuery.of(context).disableAnimations;
 
     final kart = Container(
       constraints: const BoxConstraints(minHeight: 168),
@@ -181,14 +179,12 @@ class KaydirmaliKartDurumu extends State<KaydirmaliKart>
         TweenAnimationBuilder<double>(
           key: ValueKey('giris${widget.anahtar}'),
           tween: Tween<double>(begin: 0, end: 1),
-          duration: MediaQuery.of(context).disableAnimations
-              ? Duration.zero
-              : const Duration(milliseconds: 260),
+          duration: Duration(milliseconds: hareketsiz ? 200 : 260),
           curve: Curves.easeOutCubic,
           builder: (context, v, child) => Opacity(
             opacity: v.clamp(0.0, 1.0),
             child: Transform.translate(
-              offset: Offset(0, (1 - v) * 24),
+              offset: Offset(0, hareketsiz ? 0 : (1 - v) * 24),
               child: child,
             ),
           ),
@@ -196,6 +192,9 @@ class KaydirmaliKartDurumu extends State<KaydirmaliKart>
             animation: _ucus,
             builder: (context, child) {
               final u = Curves.easeIn.transform(_ucus.value);
+              if (hareketsiz) {
+                return Opacity(opacity: 1 - u, child: child);
+              }
               return Transform.translate(
                 offset: Offset(_ucusYonu * u * genislik * 1.2, u * 40),
                 child: Transform.rotate(
