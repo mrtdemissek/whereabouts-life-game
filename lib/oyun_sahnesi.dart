@@ -18,6 +18,7 @@ class OyunSahnesi extends StatefulWidget {
   final int balonNo; // her kararda artar; balonu yeniden gösterir
   final double tepeOrani; // dünyanın tepesi sahne yüksekliğinin kaçta kaçında
   final double ustBosluk; // balonun üstte bırakacağı boşluk (ölçüler için)
+  final bool balonKalici; // true: balon sönmez (ana ekran)
   const OyunSahnesi({
     required this.yas,
     required this.ten,
@@ -30,6 +31,7 @@ class OyunSahnesi extends StatefulWidget {
     this.balonNo = 0,
     this.tepeOrani = 0.70,
     this.ustBosluk = 4,
+    this.balonKalici = false,
     super.key,
   });
 
@@ -212,7 +214,9 @@ class _OyunSahnesiState extends State<OyunSahnesi>
                 animation: _balon,
                 builder: (context, _) {
                   final t = _balon.value;
-                  final o = t < 0.8 ? 1.0 : (1 - (t - 0.8) / 0.2);
+                  final o = widget.balonKalici
+                      ? 1.0
+                      : (t < 0.8 ? 1.0 : (1 - (t - 0.8) / 0.2));
                   return Opacity(
                     opacity: o.clamp(0.0, 1.0),
                     child: Align(

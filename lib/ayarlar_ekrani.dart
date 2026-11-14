@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dil.dart';
 import 'muzik.dart';
-import 'oyuncak.dart';
+import 'oyun_ui.dart';
 import 'ses.dart';
 import 'tema.dart';
 
@@ -16,114 +16,144 @@ class _AyarlarEkraniState extends State<AyarlarEkrani> {
   final Ses ses = Ses.ornek;
   final Muzik muzik = Muzik.ornek;
 
+  Widget _baslik(String s) => Padding(
+        padding: const EdgeInsets.only(bottom: 10, top: 6),
+        child: Text(s, style: Yazi.piksel(boyut: 19, kalinlik: FontWeight.w700)),
+      );
+
+  Widget _anahtar(String yazi, bool deger, Future<void> Function(bool) degisti) {
+    return SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(yazi, style: Yazi.govde(boyut: 16, kalinlik: FontWeight.w800)),
+      value: deger,
+      thumbColor: const WidgetStatePropertyAll(Renk.kagit),
+      trackColor: WidgetStateProperty.resolveWith(
+        (d) => d.contains(WidgetState.selected) ? Renk.artis : Renk.soluk,
+      ),
+      onChanged: (v) async {
+        await degisti(v);
+        if (mounted) setState(() {});
+      },
+    );
+  }
+
+  Widget _kucukDugme(String yazi, VoidCallback onTap) => OyunDugme(
+        yukseklik: 44,
+        golge: 3,
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Text(yazi, style: Yazi.govde(boyut: 14, kalinlik: FontWeight.w800)),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final yerel = context.yerel;
-    const baslik = TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
+    final mq = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(context.t('ayarlar'))),
       body: ListView(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.fromLTRB(16, mq.padding.top + 8, 16, 32 + mq.padding.bottom),
         children: [
-          Text(context.t('dil'), style: baslik),
-          const SizedBox(height: 12),
-          for (final d in desteklenenDiller)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: GestureDetector(
-                onTap: () => yerel.dilSec(d.kod),
-                child: OyuncakKart(
-                  renk: d.kod == yerel.kod ? Renk.lavanta : Renk.kagit,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
-                  ),
-                  child: Row(
-                    children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 48,
+                child: OyunDugme(
+                  yukseklik: 44,
+                  golge: 3,
+                  anlam: context.t('geri'),
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(Icons.arrow_back_rounded),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                context.t('ayarlar'),
+                style: Yazi.piksel(boyut: 26, kalinlik: FontWeight.w700),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          OyunPanel(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _baslik(context.t('dil')),
+                Row(
+                  children: [
+                    for (final d in desteklenenDiller) ...[
+                      if (d != desteklenenDiller.first) const SizedBox(width: 10),
                       Expanded(
-                        child: Text(
-                          d.ad,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                        child: OyunDugme(
+                          yukseklik: 52,
+                          renk: d.kod == yerel.kod ? Renk.lavanta : Renk.kagit,
+                          anlam: d.ad,
+                          onTap: () => yerel.dilSec(d.kod),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(d.ad, style: Yazi.govde(boyut: 16, kalinlik: FontWeight.w800)),
+                              if (d.kod == yerel.kod) ...[
+                                const SizedBox(width: 6),
+                                const Icon(Icons.check, size: 20),
+                              ],
+                            ],
                           ),
                         ),
                       ),
-                      if (d.kod == yerel.kod) const Icon(Icons.check),
                     ],
-                  ),
+                  ],
                 ),
-              ),
+              ],
             ),
+          ),
           const SizedBox(height: 16),
-          Text(context.t('ses_baslik'), style: baslik),
-          const SizedBox(height: 4),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(context.t('ses_efekt')),
-            value: ses.sesAcik,
-            onChanged: (v) async {
-              await ses.sesAyarla(v);
-              setState(() {});
-            },
+          OyunPanel(
+            padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _baslik(context.t('ses_baslik')),
+                _anahtar(context.t('ses_efekt'), ses.sesAcik, ses.sesAyarla),
+                _anahtar(context.t('muzik'), muzik.acik, muzik.ayarla),
+                _anahtar(context.t('titresim'), ses.titresimAcik, ses.titresimAyarla),
+              ],
+            ),
           ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(context.t('muzik')),
-            value: muzik.acik,
-            onChanged: (v) async {
-              await muzik.ayarla(v);
-              setState(() {});
-            },
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(context.t('titresim')),
-            value: ses.titresimAcik,
-            onChanged: (v) async {
-              await ses.titresimAyarla(v);
-              setState(() {});
-            },
-          ),
-          const SizedBox(height: 12),
-          Text(context.t('ses_dene'), style: baslik),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              for (final t in SesTuru.values)
-                ElevatedButton(
-                  onPressed: () => ses.cal(t),
-                  child: Text(context.t('ses_${t.name}')),
+          const SizedBox(height: 16),
+          OyunPanel(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _baslik(context.t('ses_dene')),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final t in SesTuru.values)
+                      _kucukDugme(context.t('ses_${t.name}'), () => ses.cal(t)),
+                    _kucukDugme(
+                      context.t('titresim_dene'),
+                      () => ses.titret(TitresimTuru.orta),
+                    ),
+                  ],
                 ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () => ses.titret(TitresimTuru.orta),
-            child: Text(context.t('titresim_dene')),
-          ),
-          const SizedBox(height: 24),
-          Text(context.t('muzik_dene'), style: baslik),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              ElevatedButton(
-                onPressed: () => muzik.cal(MuzikTuru.ana),
-                child: Text(context.t('muzik_ana')),
-              ),
-              ElevatedButton(
-                onPressed: () => muzik.cal(MuzikTuru.oyun),
-                child: Text(context.t('muzik_oyun')),
-              ),
-              ElevatedButton(
-                onPressed: () => muzik.durdur(),
-                child: Text(context.t('muzik_durdur')),
-              ),
-            ],
+                const SizedBox(height: 14),
+                _baslik(context.t('muzik_dene')),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    _kucukDugme(context.t('muzik_ana'), () => muzik.cal(MuzikTuru.ana)),
+                    _kucukDugme(context.t('muzik_oyun'), () => muzik.cal(MuzikTuru.oyun)),
+                    _kucukDugme(context.t('muzik_durdur'), () => muzik.durdur()),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

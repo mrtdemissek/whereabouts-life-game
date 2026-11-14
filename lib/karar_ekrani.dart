@@ -9,7 +9,8 @@ import 'olcu_paneli.dart';
 import 'oyun_ui.dart';
 import 'oyun_sahnesi.dart';
 import 'kaydirmali_kart.dart';
-import 'hayat_sonu.dart';
+import 'hayat_karnesi.dart';
+import 'ani.dart';
 import 'ulke.dart';
 import 'atlas.dart';
 import 'rozet.dart';
@@ -143,6 +144,8 @@ class _KararEkraniState extends State<KararEkrani> {
   int tepkiNo = 0;
   bool kutlama = false; // rozet kutlaması başladı mı
   final _kartAnahtari = GlobalKey<KaydirmaliKartDurumu>();
+  final List<Ani> anilar = []; // hayat albümü için anlar
+  int enDusukSaglik = 100; // hayat boyunca sağlığın en düşük değeri
   late final Hedef hedef; // bu hayatın hedefi (doğumda seçilir)
   bool hedefAdimi = false; // son seçim hedefe ilk kez yaklaştırdı mı
   HayatYildizi? yildiz; // hayat bitince hesaplanır
@@ -176,6 +179,9 @@ class _KararEkraniState extends State<KararEkrani> {
     etiketler.add(ulkeTuru(widget.ulke.omur));
     etiketler.add(g.nextBool() ? 'kent' : 'kir');
     hedef = hedefSec(g);
+    anilar.add(Ani(0, 3, (c) => c.t('ani_dogum', {
+          'ulke': widget.ulke.adi(c.yerel.kod),
+        })));
     riskleriYukle().then((harita) {
       risk = harita[widget.ulke.kod];
     });
@@ -222,9 +228,12 @@ class _KararEkraniState extends State<KararEkrani> {
     );
     olay = o;
     kullanilanOlaylar.add(o.id);
+    final oYas = yas;
+    anilar.add(Ani(oYas, 0, (c) => ilkCumle(c.t('aile_${o.id}'))));
     zaman = _sinirla(zaman + o.etki.zaman);
     para = _sinirla(para + o.etki.para);
     saglik = _sinirla(saglik + o.etki.saglik);
+    enDusukSaglik = min(enDusukSaglik, saglik);
     iliski = _sinirla(iliski + o.etki.iliski);
   }
 
@@ -300,6 +309,11 @@ class _KararEkraniState extends State<KararEkrani> {
         !etiketler.any(hedef.etiketler.contains);
     etiketler.addAll(yeniEtiketler);
     sonucAnahtari = '${k.id}_${sag ? 'sag' : 'sol'}_son';
+    // Önemli anlar albüme girer: hedefe adım, olay ve zincir kartları
+    if (hedefAdimi || k is OlayKarti || k.id.startsWith('c')) {
+      final anahtar = sonucAnahtari!;
+      anilar.add(Ani(eskiYas, 2, (c) => ilkCumle(c.t(anahtar))));
+    }
 
     setState(() {
       zaman = _sinirla(zaman + e.zaman);
@@ -311,6 +325,7 @@ class _KararEkraniState extends State<KararEkrani> {
       final sifirda =
           (zaman == 0 ? 1 : 0) + (para == 0 ? 1 : 0) + (iliski == 0 ? 1 : 0);
       saglik = _sinirla(saglik - sifirCezasi * sifirda);
+      enDusukSaglik = min(enDusukSaglik, saglik);
 
       if (saglik == 0) {
         _bitir(_Bitis.saglik, yas);
@@ -322,6 +337,11 @@ class _KararEkraniState extends State<KararEkrani> {
           yas += adim;
           gecenYil = adim;
           donumAnahtari = _donumBul(eskiYas, yas);
+          final d = donumAnahtari;
+          if (d != null) {
+            anilar.add(Ani(yas, 1, (c) =>
+                (c.yerel.kod == 'tr' ? _donumTr[d] : _donumEn[d]) ?? ''));
+          }
           _sonrakiKart();
         }
       }
@@ -336,17 +356,10 @@ class _KararEkraniState extends State<KararEkrani> {
 
   // Ülkeyi atlasa işler, rozetleri ve günlük seriyi değerlendirir
   Future<void> _hayatiKaydet() async {
+    // Bu ülkede daha önce doğulmuş muydu (işaretlemeden önce bakılır)
+    final onceDenendi = (await atlasOku()).denendiMi(widget.ulke.kod);
     await ulkeyiIsaretle(widget.ulke.kod, tamamlandi: tamamlandi);
-    final sayi = await yasananUlkeSayisi();
-    final yeniler = await rozetleriDegerlendir(
-      dogalSon: tamamlandi,
-      ulkeOmru: widget.ulke.omur,
-      zaman: zaman,
-      para: para,
-      saglik: saglik,
-      iliski: iliski,
-      yasananUlkeSayisi: sayi,
-    );
+    final atlas = await atlasOku();
     final hedefOk = hedef.basarildiMi(
       hayatEtiketleri: etiketler,
       saglik: saglik,
@@ -364,6 +377,7 @@ class _KararEkraniState extends State<KararEkrani> {
           iliski >= 40,
     );
     final onceki = await yildizKaydet(widget.ulke.kod, y.sayi);
+    final toplam = await toplamYildiz();
     var sonuc = _GunlukSonuc.yok;
     var yeniSeri = 0;
     if (widget.gunluk) {
@@ -374,6 +388,28 @@ class _KararEkraniState extends State<KararEkrani> {
         sonuc = _GunlukSonuc.basarisiz;
       }
     }
+    final yeniler = await rozetleriDegerlendir(
+      HayatOzeti(
+        tamamlandi: tamamlandi,
+        ulkeOmru: widget.ulke.omur,
+        olumYas: olumYas,
+        zaman: zaman,
+        para: para,
+        saglik: saglik,
+        iliski: iliski,
+        etiketler: etiketler,
+        hedefId: hedef.id,
+        hedefBasarildi: hedefOk,
+        yildiz: y.sayi,
+        toplamYildiz: toplam,
+        yasananUlke: atlas.yasananSayisi,
+        tamamlananUlke: atlas.tamamSayisi,
+        ulkeDahaOnceDenendi: onceDenendi,
+        gunlukTamamlandi: sonuc == _GunlukSonuc.tamam,
+        gunlukSeri: yeniSeri,
+        enDusukSaglik: enDusukSaglik,
+      ),
+    );
     if (!mounted) return;
     setState(() {
       yeniRozetler = yeniler;
@@ -813,8 +849,79 @@ class _KararEkraniState extends State<KararEkrani> {
     );
   }
 
+  // Denge yıldızı alınamadıysa en düşük ölçü, ör. "para 29"
+  String _dengeDetay(BuildContext context) {
+    final olculer = <(String, int)>[
+      ('zaman', zaman),
+      ('para', para),
+      ('saglik', saglik),
+      ('iliski', iliski),
+    ]..sort((a, b) => a.$2.compareTo(b.$2));
+    if (olumYas < 30) return context.t('karne_genc_oldu');
+    final e = olculer.first;
+    return '${context.t('olcu_${e.$1}').toLowerCase()} ${e.$2}';
+  }
+
+  // Hayat bitince: gece sahnesinin üstünde Hayat Karnesi
+  Widget _karneEkrani(BuildContext context) {
+    final hareketsiz = MediaQuery.of(context).disableAnimations;
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: OyunSahnesi(
+              yas: yas,
+              ten: ten,
+              gomlek: gomlek,
+              bitti: true,
+              tepeOrani: 0.56,
+            ),
+          ),
+          Positioned.fill(
+            child: SafeArea(
+              bottom: false,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0, end: 1),
+                duration: hareketsiz
+                    ? Duration.zero
+                    : const Duration(milliseconds: 900),
+                curve: Curves.easeOut,
+                builder: (context, v, child) => Opacity(
+                  opacity: v,
+                  child: Transform.translate(
+                    offset: Offset(0, (1 - v) * 24),
+                    child: child,
+                  ),
+                ),
+                child: HayatKarnesi(
+                  ulkeAdi: widget.ulke.adi(context.yerel.kod),
+                  olumYas: olumYas,
+                  omur: omurSuresi,
+                  yildiz: yildiz,
+                  oncekiEnIyi: oncekiEnIyi,
+                  hedefAd: context.t('hedef_${hedef.id}_ad'),
+                  dengeDetay: _dengeDetay(context),
+                  mesaj: _bitisMesaji(context),
+                  album: albumSec(anilar),
+                  yeniRozetler: yeniRozetler,
+                  rozetleriGoster: kutlama,
+                  ten: ten,
+                  gomlek: gomlek,
+                  yenidenBasla: () => Navigator.pop(context),
+                ),
+              ),
+            ),
+          ),
+          if (kutlama)
+            const Positioned.fill(child: IgnorePointer(child: Konfeti())),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (bitti) return _karneEkrani(context);
     final sifirda = zaman == 0 || para == 0 || iliski == 0;
     final k = kart;
     final mq = MediaQuery.of(context);
@@ -858,20 +965,7 @@ class _KararEkraniState extends State<KararEkrani> {
                 if (!bitti && yas >= omurSuresi)
                   _uyari(context.t('omur_asildi')),
                 Expanded(
-                  child: bitti
-                      ? SingleChildScrollView(
-                          padding: const EdgeInsets.only(top: 16, bottom: 24),
-                          child: HayatSonuKarti(
-                            mesaj: _bitisMesaji(context),
-                            yeniRozetler: yeniRozetler,
-                            rozetleriGoster: kutlama,
-                            yildiz: yildiz,
-                            oncekiEnIyi: oncekiEnIyi,
-                            hedefAd: context.t('hedef_${hedef.id}_ad'),
-                            yenidenBasla: () => Navigator.pop(context),
-                          ),
-                        )
-                      : Column(
+                  child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             if (yas < kartBaslangicYasi)

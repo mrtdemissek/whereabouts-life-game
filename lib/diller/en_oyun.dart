@@ -41,4 +41,28 @@ const Map<String, String> enOyun = {
   'evre_genc': 'YOUTH',
   'evre_yetiskin': 'ADULTHOOD',
   'evre_yasli': 'OLD AGE',
+
+  'ani_dogum': 'You were born in {ulke}.',
+  'karne_baslik': 'LIFE REPORT',
+  'karne_yas': 'age {n}',
+  'karne_album': 'Life album',
+  'karne_nasil': 'How it ended',
+  'karne_paylas': 'Share',
+  'karne_kopyalandi': 'Life summary copied to clipboard.',
+  'karne_paylas_metni': 'I lived a life born in {ulke} on Whereabouts: age {yas}, {n}/3 stars.',
+  'karne_genc_oldu': 'life ended before 30',
+
+  'ana_balon': 'Where will you be born today?',
+  'yeni_hayat_dugme': 'NEW LIFE ▶',
+  'gunluk_kisa': 'Daily',
+  'gun': 'days',
+
+  'koleksiyon': 'Collection',
+  'yasanan_ulkeler': 'Countries lived',
+  'filtre_yasanan': 'Lived',
+  'rozet_kazanilmadi': 'Not earned yet.',
+  'dolap': 'Wardrobe',
+  'dolap_acik': 'Unlock new outfits and world themes with stars.',
+  'yakinda': 'Soon',
+  'dogum_beklenen': 'Expected age',
 };

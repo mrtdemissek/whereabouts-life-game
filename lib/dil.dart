@@ -14,6 +14,7 @@ import 'diller/tr_olay2.dart';
 import 'diller/tr_ses.dart';
 import 'diller/tr_gunluk.dart';
 import 'diller/tr_oyun.dart';
+import 'diller/tr_rozet.dart';
 import 'diller/en.dart';
 import 'diller/en_kartlar.dart';
 import 'diller/en_kartlar2.dart';
@@ -28,6 +29,7 @@ import 'diller/en_olay2.dart';
 import 'diller/en_ses.dart';
 import 'diller/en_gunluk.dart';
 import 'diller/en_oyun.dart';
+import 'diller/en_rozet.dart';
 
 // Desteklenen bir dil: kod ve dilin kendi adı
 class DilBilgisi {
@@ -57,6 +59,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...trSes,
     ...trGunluk,
     ...trOyun,
+    ...trRozet,
   },
   'en': {
     ...enMetin,
@@ -73,6 +76,7 @@ const Map<String, Map<String, String>> _metinler = {
     ...enSes,
     ...enGunluk,
     ...enOyun,
+    ...enRozet,
   },
 };
 

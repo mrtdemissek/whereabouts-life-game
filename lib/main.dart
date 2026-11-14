@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'acilis_ekrani.dart';
+import 'ana_ekran.dart';
 import 'dil.dart';
 import 'muzik.dart';
 import 'ses.dart';
@@ -39,7 +40,7 @@ class WhereaboutsApp extends StatelessWidget {
           },
         ),
       ),
-      home: const AcilisEkrani(),
+      home: const AnaEkran(),
     );
   }
 }

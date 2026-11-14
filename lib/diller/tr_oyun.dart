@@ -41,4 +41,28 @@ const Map<String, String> trOyun = {
   'evre_genc': 'GENÇLİK',
   'evre_yetiskin': 'YETİŞKİNLİK',
   'evre_yasli': 'YAŞLILIK',
+
+  'ani_dogum': '{ulke} topraklarında doğdun.',
+  'karne_baslik': 'HAYAT KARNESİ',
+  'karne_yas': '{n} yaş',
+  'karne_album': 'Hayat albümü',
+  'karne_nasil': 'Nasıl bitti',
+  'karne_paylas': 'Paylaş',
+  'karne_kopyalandi': 'Hayat özeti panoya kopyalandı.',
+  'karne_paylas_metni': 'Whereabouts\'ta {ulke} doğumlu bir hayat yaşadım: {yas} yaş, {n}/3 yıldız.',
+  'karne_genc_oldu': 'hayat 30 yaşından önce bitti',
+
+  'ana_balon': 'Bugün nerede doğacaksın?',
+  'yeni_hayat_dugme': 'YENİ HAYAT ▶',
+  'gunluk_kisa': 'Günlük',
+  'gun': 'gün',
+
+  'koleksiyon': 'Koleksiyon',
+  'yasanan_ulkeler': 'Yaşanan ülkeler',
+  'filtre_yasanan': 'Yaşanan',
+  'rozet_kazanilmadi': 'Henüz kazanılmadı.',
+  'dolap': 'Kıyafet dolabı',
+  'dolap_acik': 'Yıldızlarla yeni kıyafet ve dünya temaları aç.',
+  'yakinda': 'Yakında',
+  'dogum_beklenen': 'Beklenen yaş',
 };
