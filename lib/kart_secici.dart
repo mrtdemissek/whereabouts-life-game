@@ -32,12 +32,14 @@ final List<Karar> _tumKartlar = [
 // risk verisi varsa ve skor eşiği aşıyorsa çıkar. rnd verilirse seçim ondan
 // yapılır (günlük meydan okumada herkes için aynı).
 // omur şimdilik kullanılmıyor; çağıranları değiştirmemek için duruyor.
+// oncelik: hayat hedefinin etiketleri; bu etiketleri veren kartlar öne çıkar.
 Karar yeniKartSec(
   int yas,
   List<Karar> gecmis,
   Set<String> etiketler, {
   UlkeRiskleri? risk,
   double omur = 85,
+  Set<String> oncelik = const {},
   Random? rnd,
 }) {
   final r = rnd ?? _rastgele;
@@ -59,6 +61,12 @@ Karar yeniKartSec(
     if (k is OlayKarti) {
       final s = olayRiski(k.riskAlan, risk) ?? 0.0;
       return k.agirlik * s * s * olayCarpani;
+    }
+    // Hayat hedefine götüren kartlar daha sık çıkar
+    if (oncelik.isNotEmpty &&
+        (k.solEtiket.any(oncelik.contains) ||
+            k.sagEtiket.any(oncelik.contains))) {
+      return k.agirlik * 2.5;
     }
     return k.agirlik;
   }

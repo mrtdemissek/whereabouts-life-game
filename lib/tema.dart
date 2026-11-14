@@ -4,20 +4,60 @@ import 'package:google_fonts/google_fonts.dart';
 // Pastel oyuncak renk paleti
 class Renk {
   static const krem = Color(0xFFFFF6E9); // arka plan
-  static const kagit = Color(0xFFFFFFFF); // kartlar
-  static const murekkep = Color(0xFF4A3F5C); // metin ve çerçeveler
-  static const lavanta = Color(0xFFC3B1E8); // ana vurgu
+  static const kagit = Color(0xFFFFFDF7); // kartlar ve paneller
+  static const murekkep = Color(0xFF3B2F4A); // metin, çerçeve, gölge
+  static const lavanta = Color(0xFFB9A5EA); // ana vurgu
   static const nane = Color(0xFFBDEBD6);
   static const seftali = Color(0xFFFFD3B6);
   static const gokMavisi = Color(0xFFBFE3F5);
   static const pembe = Color(0xFFFFC8DD);
-  static const limon = Color(0xFFFFF1A8);
+  static const limon = Color(0xFFFFE89A);
+  static const mercan = Color(0xFFFF8A7A); // ana eylem düğmesi
+  static const altin = Color(0xFFFFD84D); // yıldız
+  static const bos = Color(0xFFE6E0EE); // boş çubuk dilimi
+  static const soluk = Color(0xFF6B6280); // ikincil metin (kontrast 4.5:1+)
+  static const gece = Color(0xFF1F1D3A);
+  static const artis = Color(0xFF15803D);
+  static const azalis = Color(0xFFC2410C);
 
-  // Ölçü renkleri
-  static const zaman = Color(0xFF8EC9F0);
-  static const para = Color(0xFFF7D774);
-  static const saglik = Color(0xFF9EDDB5);
-  static const iliski = Color(0xFFFFA8C5);
+  // Ölçü renkleri (çubuk dilimleri)
+  static const zaman = Color(0xFF5BA8E0);
+  static const para = Color(0xFFE8B92E);
+  static const saglik = Color(0xFF4FB57D);
+  static const iliski = Color(0xFFF06C9B);
+}
+
+// Yazı stilleri: kelimeler ve başlıklar piksel yazı tipiyle, sayılar ise
+// karışmasın diye okunaklı ve eşit genişlikli Nunito ile yazılır.
+class Yazi {
+  static TextStyle piksel({
+    double boyut = 16,
+    FontWeight kalinlik = FontWeight.w500,
+    Color renk = Renk.murekkep,
+  }) =>
+      GoogleFonts.pixelifySans(
+        fontSize: boyut,
+        fontWeight: kalinlik,
+        color: renk,
+      );
+
+  static TextStyle sayi({
+    double boyut = 15,
+    Color renk = Renk.murekkep,
+  }) =>
+      GoogleFonts.nunito(
+        fontSize: boyut,
+        fontWeight: FontWeight.w800,
+        color: renk,
+        fontFeatures: const [FontFeature.tabularFigures()],
+      );
+
+  static TextStyle govde({
+    double boyut = 15,
+    FontWeight kalinlik = FontWeight.w700,
+    Color renk = Renk.murekkep,
+  }) =>
+      GoogleFonts.nunito(fontSize: boyut, fontWeight: kalinlik, color: renk);
 }
 
 ThemeData temaOlustur() {
@@ -35,7 +75,7 @@ ThemeData temaOlustur() {
   return taban.copyWith(
     scaffoldBackgroundColor: Renk.krem,
     iconTheme: const IconThemeData(color: Renk.murekkep),
-    textTheme: GoogleFonts.fredokaTextTheme(taban.textTheme).apply(
+    textTheme: GoogleFonts.nunitoTextTheme(taban.textTheme).apply(
       bodyColor: Renk.murekkep,
       displayColor: Renk.murekkep,
     ),
@@ -45,11 +85,7 @@ ThemeData temaOlustur() {
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
-      titleTextStyle: GoogleFonts.fredoka(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-        color: Renk.murekkep,
-      ),
+      titleTextStyle: Yazi.piksel(boyut: 22, kalinlik: FontWeight.w700),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -58,10 +94,7 @@ ThemeData temaOlustur() {
         elevation: 0,
         side: const BorderSide(color: Renk.murekkep, width: 3),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        textStyle: GoogleFonts.fredoka(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        textStyle: Yazi.piksel(boyut: 17, kalinlik: FontWeight.w700),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
       ),
     ),
