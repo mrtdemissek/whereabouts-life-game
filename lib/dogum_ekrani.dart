@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'dil.dart';
+import 'dolap.dart';
 import 'gecis.dart';
 import 'karar_ekrani.dart';
 import 'oyun_sahnesi.dart';
@@ -71,11 +72,11 @@ class _DogumEkraniState extends State<DogumEkrani> {
     return Scaffold(
       body: Stack(
         children: [
-          const Positioned.fill(
+          Positioned.fill(
             child: OyunSahnesi(
               yas: 0,
-              ten: Color(0xFFF2C29B),
-              gomlek: Color(0xFF3F51B5),
+              ten: const Color(0xFFF2C29B),
+              gomlek: Dolap.ornek.gomlekRengi ?? const Color(0xFF3F51B5),
               tepeOrani: 0.62,
             ),
           ),

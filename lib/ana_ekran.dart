@@ -6,6 +6,8 @@ import 'atlas.dart';
 import 'ayarlar_ekrani.dart';
 import 'dil.dart';
 import 'dogum_ekrani.dart';
+import 'dolap.dart';
+import 'dolap_ekrani.dart';
 import 'gecis.dart';
 import 'gunluk.dart';
 import 'hayat_karnesi.dart';
@@ -221,6 +223,71 @@ class _AnaEkranState extends State<AnaEkran> {
     );
   }
 
+  // Günün meydan okuması: hangi ülke olduğu, seri ve bugünkü durum
+  Widget _gunlukAfisi(BuildContext context, Ulke? gunun) {
+    final dil = context.yerel.kod;
+    final tamam = _gunluk.bugunTamam;
+    return OyunDugme(
+      renk: tamam ? Renk.nane : Renk.limon,
+      yukseklik: 64,
+      anlam: context.t('gunluk_banner'),
+      onTap: gunun == null
+          ? null
+          : () => _git(KararEkrani(ulke: gunun, gunluk: true)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          children: [
+            Icon(
+              tamam ? Icons.check_circle : Icons.calendar_month,
+              size: 30,
+              color: Renk.murekkep,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    context.t('gunun_meydan_okumasi'),
+                    style: Yazi.piksel(boyut: 13),
+                  ),
+                  Text(
+                    gunun?.adi(dil) ?? '…',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Yazi.piksel(boyut: 19, kalinlik: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  tamam ? context.t('bugun_tamam') : context.t('gunluk_kural'),
+                  style: Yazi.govde(boyut: 12, kalinlik: FontWeight.w800),
+                ),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(text: '${context.t('seri')} ', style: Yazi.govde(boyut: 12, kalinlik: FontWeight.w800)),
+                      TextSpan(text: '${_gunluk.seri}', style: Yazi.sayi(boyut: 13)),
+                      TextSpan(text: ' ${context.t('gun')}', style: Yazi.govde(boyut: 12, kalinlik: FontWeight.w800)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -239,7 +306,7 @@ class _AnaEkranState extends State<AnaEkran> {
                 child: OyunSahnesi(
                   yas: 30,
                   ten: const Color(0xFFD9A066),
-                  gomlek: const Color(0xFFEF6C00),
+                  gomlek: Dolap.ornek.gomlekRengi ?? const Color(0xFFEF6C00),
                   balon: context.t('ana_balon'),
                   balonKalici: true,
                   tepeOrani: 0.58,
@@ -300,6 +367,8 @@ class _AnaEkranState extends State<AnaEkran> {
                           ),
                         ),
                       ),
+                    _gunlukAfisi(context, gunun),
+                    const SizedBox(height: 10),
                     OyunDugme(
                       renk: Renk.mercan,
                       yukseklik: 66,
@@ -318,16 +387,9 @@ class _AnaEkranState extends State<AnaEkran> {
                     Row(
                       children: [
                         _kareDugme(
-                          simge: _gunluk.bugunTamam
-                              ? Icons.check_circle
-                              : Icons.calendar_month,
-                          yazi: context.t('gunluk_kisa'),
-                          renk: _gunluk.bugunTamam ? Renk.nane : Renk.kagit,
-                          onTap: gunun == null
-                              ? null
-                              : () => _git(
-                                    KararEkrani(ulke: gunun, gunluk: true),
-                                  ),
+                          simge: Icons.checkroom,
+                          yazi: context.t('dolap_kisa'),
+                          onTap: () => _git(const DolapEkrani()),
                         ),
                         const SizedBox(width: 10),
                         _kareDugme(

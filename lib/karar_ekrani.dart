@@ -11,6 +11,8 @@ import 'oyun_sahnesi.dart';
 import 'kaydirmali_kart.dart';
 import 'hayat_karnesi.dart';
 import 'ani.dart';
+import 'dolap.dart';
+import 'efektler.dart';
 import 'ulke.dart';
 import 'atlas.dart';
 import 'rozet.dart';
@@ -146,6 +148,8 @@ class _KararEkraniState extends State<KararEkrani> {
   final _kartAnahtari = GlobalKey<KaydirmaliKartDurumu>();
   final List<Ani> anilar = []; // hayat albümü için anlar
   int enDusukSaglik = 100; // hayat boyunca sağlığın en düşük değeri
+  int sarsintiNo = 0; // büyük kayıplarda ekran sarsılır
+  int donumNo = 0; // dönüm noktası afişini tetikler
   late final Hedef hedef; // bu hayatın hedefi (doğumda seçilir)
   bool hedefAdimi = false; // son seçim hedefe ilk kez yaklaştırdı mı
   HayatYildizi? yildiz; // hayat bitince hesaplanır
@@ -174,7 +178,10 @@ class _KararEkraniState extends State<KararEkrani> {
     super.initState();
     final g = widget.gunluk ? Tohumlu(_tohum) : _r;
     ten = _tenler[g.nextInt(_tenler.length)];
-    gomlek = _gomlekler[g.nextInt(_gomlekler.length)];
+    // Dolaptan bir kıyafet seçildiyse o giyilir (rastgele sayı yine çekilir,
+    // günlük meydan okumada herkesin hayatı aynı kalsın)
+    final rastgeleGomlek = _gomlekler[g.nextInt(_gomlekler.length)];
+    gomlek = Dolap.ornek.gomlekRengi ?? rastgeleGomlek;
     // Hayatın bağlamı: ülkenin koşulları ve yaşanılan yer
     etiketler.add(ulkeTuru(widget.ulke.omur));
     etiketler.add(g.nextBool() ? 'kent' : 'kir');
@@ -255,6 +262,7 @@ class _KararEkraniState extends State<KararEkrani> {
       ses.cal(SesTuru.secim);
     }
     setState(() {
+      if (net <= -15) sarsintiNo++;
       tepki = net > 0
           ? Tepki.sevinc
           : net < 0
@@ -339,6 +347,7 @@ class _KararEkraniState extends State<KararEkrani> {
           donumAnahtari = _donumBul(eskiYas, yas);
           final d = donumAnahtari;
           if (d != null) {
+            donumNo++;
             anilar.add(Ani(yas, 1, (c) =>
                 (c.yerel.kod == 'tr' ? _donumTr[d] : _donumEn[d]) ?? ''));
           }
@@ -351,6 +360,14 @@ class _KararEkraniState extends State<KararEkrani> {
       _hayatiKaydet();
     } else {
       _olcuSesi(onceki);
+      if (donumAnahtari != null) {
+        // Dönüm noktası: kısa bir kutlama sesi ve titreşim
+        Future.delayed(const Duration(milliseconds: 250), () {
+          if (!mounted) return;
+          Ses.ornek.cal(SesTuru.dogum);
+          Ses.ornek.titret(TitresimTuru.orta);
+        });
+      }
     }
   }
 
@@ -487,11 +504,7 @@ class _KararEkraniState extends State<KararEkrani> {
     if (gecenYil > 0) {
       parcalar.add(tr ? '+$gecenYil yıl geçti' : '+$gecenYil years pass');
     }
-    final donum = donumAnahtari;
-    if (donum != null) {
-      final m = tr ? _donumTr[donum] : _donumEn[donum];
-      if (m != null) parcalar.add(m);
-    }
+    // Dönüm noktası artık ortadaki afişte gösteriliyor
     if (hedefAdimi) parcalar.add('★ ${context.t('hedef_yaklastin')}');
     return parcalar.join(' · ');
   }
@@ -518,7 +531,9 @@ class _KararEkraniState extends State<KararEkrani> {
     final yaklasti = etiketler.any(hedef.etiketler.contains);
     return Padding(
       padding: const EdgeInsets.only(top: 6),
-      child: Semantics(
+      child: Ziplat(
+        aktif: yaklasti,
+        child: Semantics(
         button: true,
         child: GestureDetector(
           onTap: _hedefAcikla,
@@ -553,6 +568,7 @@ class _KararEkraniState extends State<KararEkrani> {
             ),
           ),
         ),
+      ),
       ),
     );
   }
@@ -947,7 +963,9 @@ class _KararEkraniState extends State<KararEkrani> {
               ustBosluk: ust + ustAlan + 4,
             ),
           ),
-          Padding(
+          Sarsinti(
+            tetik: sarsintiNo,
+            child: Padding(
             padding: EdgeInsets.fromLTRB(12, ust, 12, 0),
             child: Column(
               children: [
@@ -977,6 +995,21 @@ class _KararEkraniState extends State<KararEkrani> {
                         ),
                 ),
               ],
+            ),
+          ),
+          ),
+          // Dönüm noktası afişi
+          Positioned.fill(
+            child: Align(
+              alignment: const Alignment(0, -0.1),
+              child: DonumAfisi(
+                tetik: donumNo,
+                yazi: donumAnahtari == null
+                    ? null
+                    : (context.yerel.kod == 'tr'
+                        ? _donumTr[donumAnahtari]
+                        : _donumEn[donumAnahtari]),
+              ),
             ),
           ),
           if (kutlama) const Positioned.fill(child: Konfeti()),

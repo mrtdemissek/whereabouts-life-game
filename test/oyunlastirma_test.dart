@@ -10,6 +10,7 @@ import 'package:whereabouts/karar.dart';
 import 'package:whereabouts/kart_secici.dart';
 import 'package:whereabouts/kartlar2.dart';
 import 'package:whereabouts/kartlar3.dart';
+import 'package:whereabouts/kartlar4.dart';
 import 'package:whereabouts/tohumlu.dart';
 import 'package:whereabouts/yildiz.dart';
 import 'package:whereabouts/zincir.dart';
@@ -59,6 +60,7 @@ void main() {
       ...kararlar,
       ...yeniKararlar,
       ...kartlar3,
+      ...kartlar4,
       ...baglamKararlari,
       ...zincirKartlari,
     ];

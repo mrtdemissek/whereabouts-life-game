@@ -7,6 +7,7 @@ import 'dart:io';
 import '../lib/karar.dart';
 import '../lib/kartlar2.dart';
 import '../lib/kartlar3.dart';
+import '../lib/kartlar4.dart';
 import '../lib/baglam_kartlari.dart';
 import '../lib/zincir.dart';
 import '../lib/olaylar.dart';
@@ -14,6 +15,7 @@ import '../lib/olaylar2.dart';
 import '../lib/diller/tr_kartlar.dart';
 import '../lib/diller/tr_kartlar2.dart';
 import '../lib/diller/tr_kartlar3.dart';
+import '../lib/diller/tr_kartlar4.dart';
 import '../lib/diller/tr_baglam.dart';
 import '../lib/diller/tr_zincir.dart';
 import '../lib/diller/tr_olay.dart';
@@ -22,6 +24,7 @@ import '../lib/diller/tr_sonuc.dart';
 import '../lib/diller/en_kartlar.dart';
 import '../lib/diller/en_kartlar2.dart';
 import '../lib/diller/en_kartlar3.dart';
+import '../lib/diller/en_kartlar4.dart';
 import '../lib/diller/en_baglam.dart';
 import '../lib/diller/en_zincir.dart';
 import '../lib/diller/en_olay.dart';
@@ -54,16 +57,17 @@ void main() {
     'kararlar': kararlar,
     'yeniKararlar': yeniKararlar,
     'kartlar3': kartlar3,
+    'kartlar4': kartlar4,
     'baglamKararlari': baglamKararlari,
     'zincirKartlari': zincirKartlari,
     'olayKartlari': olayKartlari,
     'olayKartlari2': olayKartlari2,
   };
   final tr = <String, String>{
-    ...trKartlar, ...trKartlar2, ...trKartlar3, ...trSonuc, ...trBaglam, ...trZincir, ...trOlay, ...trOlay2,
+    ...trKartlar, ...trKartlar2, ...trKartlar3, ...trKartlar4, ...trSonuc, ...trBaglam, ...trZincir, ...trOlay, ...trOlay2,
   };
   final en = <String, String>{
-    ...enKartlar, ...enKartlar2, ...enKartlar3, ...enSonuc, ...enBaglam, ...enZincir, ...enOlay, ...enOlay2,
+    ...enKartlar, ...enKartlar2, ...enKartlar3, ...enKartlar4, ...enSonuc, ...enBaglam, ...enZincir, ...enOlay, ...enOlay2,
   };
 
   final tum = <Karar>[];

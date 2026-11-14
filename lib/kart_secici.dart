@@ -2,6 +2,7 @@ import 'dart:math';
 import 'karar.dart';
 import 'kartlar2.dart';
 import 'kartlar3.dart';
+import 'kartlar4.dart';
 import 'baglam_kartlari.dart';
 import 'olaylar.dart';
 import 'olaylar2.dart';
@@ -21,6 +22,7 @@ final List<Karar> _tumKartlar = [
   ...kararlar,
   ...yeniKararlar,
   ...kartlar3,
+  ...kartlar4,
   ...baglamKararlari,
   ...zincirKartlari,
   ...olayKartlari,

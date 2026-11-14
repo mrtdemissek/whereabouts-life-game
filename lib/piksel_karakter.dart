@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'dolap.dart';
 
 enum HayatEvresi { kucuk, cocuk, genc, yetiskin, yasli }
 
@@ -207,6 +208,7 @@ class PikselKarakter extends StatefulWidget {
   final int yas;
   final Color ten;
   final Color gomlek;
+  final Color? sac; // null: dolaptan seçilen saç rengi
   final double piksel;
   final Tepki tepki;
   final int tepkiNo; // her kararda artar; tepkiyi yeniden başlatır
@@ -217,6 +219,7 @@ class PikselKarakter extends StatefulWidget {
     this.piksel = 8,
     this.tepki = Tepki.yok,
     this.tepkiNo = 0,
+    this.sac,
     super.key,
   });
 
@@ -262,7 +265,7 @@ class _PikselKarakterState extends State<PikselKarakter>
     final p = widget.piksel;
     final evre = evreBul(widget.yas);
     final palet = <String, Color>{
-      'H': const Color(0xFF5B3A29),
+      'H': widget.sac ?? Dolap.ornek.sacRengi,
       'W': const Color(0xFFBDBDBD),
       'S': widget.ten,
       'E': const Color(0xFF222222),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'acilis_ekrani.dart';
 import 'ana_ekran.dart';
 import 'dil.dart';
+import 'dolap.dart';
 import 'muzik.dart';
 import 'ses.dart';
 import 'tema.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
   await genelYerel.yukle();
   await Ses.ornek.yukle();
   await Muzik.ornek.yukle();
+  await Dolap.ornek.yukle();
   runApp(YerelKapsam(yerel: genelYerel, child: const WhereaboutsApp()));
 }
 

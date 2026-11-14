@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'atlas.dart';
 import 'dil.dart';
+import 'dolap_ekrani.dart';
+import 'gecis.dart';
 import 'hayat_karnesi.dart';
 import 'oyun_ui.dart';
 import 'rozet.dart';
@@ -355,32 +357,41 @@ class _KoleksiyonEkraniState extends State<KoleksiyonEkrani> {
               0,
               24 + MediaQuery.of(context).padding.bottom,
             ),
-            child: OyunPanel(
+            child: OyunDugme(
               renk: Renk.limon,
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  const Icon(Icons.checkroom, size: 30),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(context.t('dolap'), style: Yazi.govde(boyut: 15, kalinlik: FontWeight.w800)),
-                        Text(context.t('dolap_acik'), style: Yazi.govde(boyut: 13)),
-                      ],
+              yukseklik: 72,
+              anlam: context.t('dolap'),
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  yumusakGecis(const DolapEkrani()),
+                );
+                _yukle();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: [
+                    const Icon(Icons.checkroom, size: 30),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(context.t('dolap'), style: Yazi.govde(boyut: 15, kalinlik: FontWeight.w800)),
+                          Text(
+                            context.t('dolap_acik'),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Yazi.govde(boyut: 13),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Renk.kagit,
-                      border: Border.all(color: Renk.murekkep, width: 2),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(context.t('yakinda'), style: Yazi.piksel(boyut: 13)),
-                  ),
-                ],
+                    Text('▶', style: Yazi.piksel(boyut: 18)),
+                  ],
+                ),
               ),
             ),
           ),

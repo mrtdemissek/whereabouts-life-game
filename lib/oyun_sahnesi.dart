@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'dolap.dart';
 import 'piksel_karakter.dart';
 import 'tema.dart';
 
@@ -179,6 +180,7 @@ class _OyunSahnesiState extends State<OyunSahnesi>
                   painter: _DunyaPainter(
                     (_donus.value * 720).floor() / 720,
                     evre,
+                    Dolap.ornek.dunyaTemasi,
                   ),
                 ),
               ),
@@ -390,7 +392,8 @@ class _Kure {
 class _DunyaPainter extends CustomPainter {
   final double t;
   final HayatEvresi evre;
-  _DunyaPainter(this.t, this.evre);
+  final DunyaTemasi? tema; // kıyafet dolabından seçilen dünya, yoksa varsayılan
+  _DunyaPainter(this.t, this.evre, this.tema);
 
   static const double _hucre = 5; // küre pikselinin boyutu
   static const double _egim = -0.6; // dönme ekseninin izleyiciye eğimi
@@ -399,9 +402,10 @@ class _DunyaPainter extends CustomPainter {
   void paint(Canvas canvas, Size s) {
     final r = s.width / 2;
     final (_, _, yakin) = _manzaraRenk(evre);
-    final cimen = Color.lerp(const Color(0xFF8BD0A4), yakin, 0.25)!;
-    final orman = Color.lerp(cimen, const Color(0xFF3F9462), 0.55)!;
-    const su = Color(0xFF96CDEE);
+    final tm = tema;
+    final cimen = tm?.cimen ?? Color.lerp(const Color(0xFF8BD0A4), yakin, 0.25)!;
+    final orman = tm?.orman ?? Color.lerp(cimen, const Color(0xFF3F9462), 0.55)!;
+    final su = tm?.su ?? const Color(0xFF96CDEE);
     Color ton(Color c, int bant) => switch (bant) {
           2 => Color.lerp(c, Colors.white, 0.28)!,
           1 => c,
@@ -536,7 +540,7 @@ class _DunyaPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _DunyaPainter old) =>
-      old.t != t || old.evre != evre;
+      old.t != t || old.evre != evre || old.tema != tema;
 }
 
 // ---------------- piksel manzara ----------------
