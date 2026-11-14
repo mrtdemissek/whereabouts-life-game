@@ -54,3 +54,7 @@ kontrol_sonucu.txt
 kontrol_sonucu.txt
 
 tani_sonucu.txt
+
+# Ajan becerileri (npx skills ile kurulur, repoya girmez)
+.agents/
+skills-lock.json
