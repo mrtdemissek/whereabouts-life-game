@@ -11,6 +11,8 @@ import 'tema.dart';
 final Yerellestirme genelYerel = Yerellestirme();
 
 Future<void> main() async {
+  // Flutter'ın "Hareketi Azalt"ta animasyonları 20 kat hızlandırmasını kapat
+  OyunBinding();
   WidgetsFlutterBinding.ensureInitialized();
   await genelYerel.yukle();
   await Ses.ornek.yukle();

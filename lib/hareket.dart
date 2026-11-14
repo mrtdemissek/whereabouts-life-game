@@ -44,6 +44,18 @@ class HareketAyari extends ChangeNotifier {
   }
 }
 
+// Flutter, telefonda "Hareketi Azalt" açıkken TÜM animasyonları kendiliğinden
+// 20 kat hızlandırır (AnimationController süreyi 0.05 ile çarpar). Bu yüzden
+// iPhone'da kartlar, geçişler, yumuşak solmalar bile göz açıp kapayana kadar
+// biter ve "animasyon yok" gibi görünür. Bu bağlama o otomatik hızlandırmayı
+// kapatır; hareketi azaltma kararını oyun kendisi verir (HareketKapsami ve
+// her ekrandaki MediaQuery.disableAnimations kontrolleri: sarsıntı yerine
+// renk, uçuş yerine solma).
+class OyunBinding extends WidgetsFlutterBinding {
+  @override
+  bool get disableAnimations => false;
+}
+
 // Uygulamanın tepesinde: MediaQuery.disableAnimations değerini seçilen moda
 // göre ayarlar. Oyundaki tüm ekranlar bu değeri okuduğu için tek yerden yönetilir.
 class HareketKapsami extends StatelessWidget {
